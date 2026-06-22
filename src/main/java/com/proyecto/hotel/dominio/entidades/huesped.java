@@ -6,6 +6,9 @@ public class huesped {
 	private String nombre_huesped;
 	private String apellido_huesped;
 	private int telefono_huesed;
+	
+	
+	
 	public huesped() {
 		super();
 	}
