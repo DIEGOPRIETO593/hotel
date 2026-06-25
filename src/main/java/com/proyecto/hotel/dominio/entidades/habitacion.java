@@ -1,6 +1,6 @@
 package com.proyecto.hotel.dominio.entidades;
 
-public class habitacion {
+public class Habitacion {
 
 	private int id_habitacion;
 	private int numero_habitacion;
@@ -8,10 +8,10 @@ public class habitacion {
 	private int piso_habitacion;
 	private int estrellas_habitacion;
 	private int capacidad_habitacion;
-	public habitacion() {
+	public Habitacion() {
 		super();
 	}
-	public habitacion(int id_habitacion, int numero_habitacion, String estado_habitacion, int piso_habitacion,
+	public Habitacion(int id_habitacion, int numero_habitacion, String estado_habitacion, int piso_habitacion,
 			int estrellas_habitacion, int capacidad_habitacion) {
 		super();
 		this.id_habitacion = id_habitacion;

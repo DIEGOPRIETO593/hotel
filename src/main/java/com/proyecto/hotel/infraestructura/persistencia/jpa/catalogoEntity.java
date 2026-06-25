@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "catalogo_servicio")
-public class catalogoEntity {
+public class CatalogoEntity {
 	
 
 	    @Id

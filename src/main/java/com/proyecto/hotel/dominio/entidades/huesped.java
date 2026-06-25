@@ -1,6 +1,6 @@
 package com.proyecto.hotel.dominio.entidades;
 
-public class huesped {
+public class Huesped {
 	private int id_huesped;
 	private String cedula_huesped;
 	private String nombre_huesped;
@@ -9,10 +9,10 @@ public class huesped {
 	
 	
 	
-	public huesped() {
+	public Huesped() {
 		super();
 	}
-	public huesped(int id_huesped, String cedula_huesped, String nombre_huesped, String apellido_huesped,
+	public Huesped(int id_huesped, String cedula_huesped, String nombre_huesped, String apellido_huesped,
 			int telefono_huesed) {
 		super();
 		this.id_huesped = id_huesped;
