@@ -2,10 +2,13 @@ package com.proyecto.hotel.infraestructura.persistencia.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
-
 
 @Data
 @Entity
@@ -13,18 +16,21 @@ import lombok.Data;
 public class DetalleServicoEntity {
 	
 	@Id
-	@Column(name = "id_estadia")
-    private int id_detalle;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_detalle") 
+	private int id_detalle;
 
-    @Column(name = "detalle_id_estadia")
-    private int id_estadia;
+	@ManyToOne
+	@JoinColumn(name = "id_estadia", referencedColumnName = "id_estadia", nullable = false)
+	private EstadiaEntity estadia;
 
-    @Column(name = "detalle_id_servicio")
-    private int id_servicio;
+	@ManyToOne
+	@JoinColumn(name = "id_servicio", referencedColumnName = "id_servicio", nullable = false)
+	private CatalogoEntity catalogoServicio;
 
-    @Column(name = "detalle_cantidad", length = 3)
-    private int cantidad;
+	@Column(name = "cantidad") 
+	private int cantidad;
 
-    @Column(name = "detalle_subtotal")
-    private double subtotal;
+	@Column(name = "subtotal") 
+	private double subtotal;
 }

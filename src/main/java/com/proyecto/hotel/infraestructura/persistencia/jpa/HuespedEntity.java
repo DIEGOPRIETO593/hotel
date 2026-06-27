@@ -2,6 +2,8 @@ package com.proyecto.hotel.infraestructura.persistencia.jpa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -11,18 +13,20 @@ import lombok.Data;
 @Table(name = "huesped")
 public class HuespedEntity {
  
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_huesped")
     private int id_huesped;
 
-    @Column(name = "huesped_cedula", length = 10)
+    @Column(name = "cedula", length = 10, unique = true)
     private String cedula;
 
-    @Column(name = "huesped_nombre", length = 80)
+    @Column(name = "nombre", length = 80)
     private String nombre;
 
-    @Column(name = "huesped_apellido", length = 80)
+    @Column(name = "apellido", length = 80)
     private String apellido;
 
-    @Column(name = "huesped_telefono", length = 10)
+    @Column(name = "telefono", length = 10)
     private String telefono;
 }

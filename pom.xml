@@ -12,7 +12,7 @@
 	<groupId>com.proyecto</groupId>
 	<artifactId>hotel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>fifa2026</name>
+	<name>hotel</name>
 	<description>Proyecto hotel- Arquitectura Limpia</description>
 	
 	<properties>

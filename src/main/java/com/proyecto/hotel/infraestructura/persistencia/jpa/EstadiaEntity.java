@@ -1,9 +1,10 @@
 package com.proyecto.hotel.infraestructura.persistencia.jpa;
 
-import java.sql.Date;
-
+import java.time.LocalDateTime; // Cambiado a LocalDateTime ya que en tu diagrama es TIMESTAMP
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -13,26 +14,27 @@ import lombok.Data;
 @Table(name = "estadia")
 public class EstadiaEntity {
 
-	
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name = "id_estadia")
     private int id_estadia;
 
-    @Column(name = "estadia_id_huesped")
+    @Column(name = "id_huesped")
     private int id_huesped;
 
-    @Column(name = "estadia_id_habitacion")
+    @Column(name = "id_habitacion")
     private int id_habitacion;
 
-    @Column(name = "estadia_fecha_ingreso")
-    private Date fecha_ingreso;
+    @Column(name = "fecha_ingreso") 
+    private LocalDateTime fecha_ingreso;
 
-    @Column(name = "estadia_fecha_salida")
-    private Date fecha_salida;
+    @Column(name = "fecha_salida") 
+    private LocalDateTime fecha_salida;
 
-    @Column(name = "estadia_cantidad_huespedes", length = 2)
+    @Column(name = "cantidad_huespedes") 
     private int cantidad_huespedes;
 
-    @Column(name = "estadia_total_pagar")
+    @Column(name = "total_pagar")
     private double total_pagar;
     
 }
