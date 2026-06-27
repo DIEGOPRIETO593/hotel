@@ -5,6 +5,7 @@ import com.proyecto.hotel.aplicacion.casosuso.entrada.ICatalogoServicioUseCase;
 import com.proyecto.hotel.dominio.entidades.CatalogoServicio;
 import com.proyecto.hotel.dominio.repositorios.ICatalogoServicioRepositorio;
 
+
 public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
 
     private final ICatalogoServicioRepositorio repositorio;

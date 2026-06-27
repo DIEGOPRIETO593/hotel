@@ -27,7 +27,7 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
 
     @Override
     public List<DetalleServicioEstadia> listarTodos() {
-        return repositorio.listarPorEstadia(0);
+        return repositorio.listarTodos();
     }
 
     @Override

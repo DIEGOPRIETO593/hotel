@@ -9,6 +9,6 @@ public interface IDetalleServicioEstadiaRepositorio {
 
 	DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle);
 	Optional<DetalleServicioEstadia> buscarPorId(int idDetalle);
-	List<DetalleServicioEstadia> listarPorEstadia(int idEstadia); 
+	List<DetalleServicioEstadia> listarTodos();
 	void eliminar(int idDetalle);
 }

@@ -4,18 +4,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Repository;
+
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
 import com.proyecto.hotel.dominio.repositorios.IDetalleServicioEstadiaRepositorio;
-import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicoEntity;
+import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicoEntity; // Importante: Tu entidad se llama "Servico"
 import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IDetalleServicioEstadiaJpaMapper;
 import com.proyecto.hotel.infraestructura.repositorios.IDetalleServicioJpaRepositorio;
+
 
 public class DetalleServicioEstadiaRepositorioImpl implements IDetalleServicioEstadiaRepositorio {
 	
 	private final IDetalleServicioJpaRepositorio jpaRepositorio;
 	private final IDetalleServicioEstadiaJpaMapper entityMapper;
 	
-	public DetalleServicioEstadiaRepositorioImpl(IDetalleServicioJpaRepositorio jpaRepositorio, IDetalleServicioEstadiaJpaMapper entityMapper) {
+	public DetalleServicioEstadiaRepositorioImpl(IDetalleServicioJpaRepositorio jpaRepositorio,
+			IDetalleServicioEstadiaJpaMapper entityMapper) {
 		super();
 		this.jpaRepositorio = jpaRepositorio;
 		this.entityMapper = entityMapper;
@@ -34,15 +38,14 @@ public class DetalleServicioEstadiaRepositorioImpl implements IDetalleServicioEs
 	}
 
 	@Override
-	public void eliminar(int idDetalle) {
-		jpaRepositorio.deleteById(idDetalle);
+	public List<DetalleServicioEstadia> listarTodos() {
+		return jpaRepositorio.findAll().stream()
+				.map(entityMapper::toDomain)
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<DetalleServicioEstadia> listarPorEstadia(int idEstadia) {
-		List<DetalleServicoEntity> entidades = jpaRepositorio.findByIdEstadia(idEstadia);
-		return entidades.stream()
-				.map(entityMapper::toDomain)
-				.collect(Collectors.toList());
+	public void eliminar(int idDetalle) {
+		jpaRepositorio.deleteById(idDetalle);
 	}
 }

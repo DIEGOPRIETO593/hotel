@@ -13,6 +13,7 @@ import lombok.Data;
 public class DetalleServicoEntity {
 	
 	@Id
+	@Column(name = "id_estadia")
     private int id_detalle;
 
     @Column(name = "detalle_id_estadia")
