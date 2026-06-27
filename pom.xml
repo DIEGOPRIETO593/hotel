@@ -9,11 +9,11 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.4</version> <relativePath /> </parent>
 	
-	<groupId>com.uisrael</groupId>
-	<artifactId>fifa2026</artifactId>
+	<groupId>com.proyecto</groupId>
+	<artifactId>hotel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fifa2026</name>
-	<description>Proyecto Fifa 2026 - Arquitectura Limpia</description>
+	<description>Proyecto hotel- Arquitectura Limpia</description>
 	
 	<properties>
 		<java.version>21</java.version>
