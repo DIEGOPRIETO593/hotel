@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class Estadia {
 
 	private int idEstadia;
-	private int idHuesped;
-	private int idHabitacion;
+	private Huesped huesped; 
+    private Habitacion habitacion;
 	private LocalDateTime fechaIngreso;
 	private LocalDateTime fechaSalida;
 	private int cantidadHuespedes;
@@ -17,17 +17,23 @@ public class Estadia {
 	}
 
 	
-	public Estadia(int idEstadia, int idHuesped, int idHabitacion, LocalDateTime fechaIngreso,
+	
+
+
+	public Estadia(int idEstadia, Huesped huesped, Habitacion habitacion, LocalDateTime fechaIngreso,
 			LocalDateTime fechaSalida, int cantidadHuespedes, double totalPagar) {
 		super();
 		this.idEstadia = idEstadia;
-		this.idHuesped = idHuesped;
-		this.idHabitacion = idHabitacion;
+		this.huesped = huesped;
+		this.habitacion = habitacion;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaSalida = fechaSalida;
 		this.cantidadHuespedes = cantidadHuespedes;
 		this.totalPagar = totalPagar;
 	}
+
+
+
 
 
 	public int getIdEstadia() {
@@ -38,23 +44,41 @@ public class Estadia {
 		this.idEstadia = idEstadia;
 	}
 
-	public int getIdHuesped() {
-		return idHuesped;
-	}
-
-	public void setIdHuesped(int idHuesped) {
-		this.idHuesped = idHuesped;
-	}
-
-	public int getIdHabitacion() {
-		return idHabitacion;
-	}
-
-	public void setIdHabitacion(int idHabitacion) {
-		this.idHabitacion = idHabitacion;
-	}
+	
 
 	
+
+	public Huesped getHuesped() {
+		return huesped;
+	}
+
+
+
+
+
+	public void setHuesped(Huesped huesped) {
+		this.huesped = huesped;
+	}
+
+
+
+
+
+	public Habitacion getHabitacion() {
+		return habitacion;
+	}
+
+
+
+
+
+	public void setHabitacion(Habitacion habitacion) {
+		this.habitacion = habitacion;
+	}
+
+
+
+
 
 	public LocalDateTime getFechaIngreso() {
 		return fechaIngreso;

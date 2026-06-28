@@ -4,8 +4,8 @@ public class DetalleServicioEstadia
 {
 
 	private int idDetalle;
-	private int idEstadia;
-	private int idServicio;
+	private Estadia estadia; 
+    private CatalogoServicio catalogo;
 	private int cantidad;
 	private double subtotal;
 
@@ -13,14 +13,55 @@ public class DetalleServicioEstadia
 		super();
 	}
 
-	public DetalleServicioEstadia(int idDetalle, int idEstadia, int idServicio, int cantidad, double subtotal) {
+	
+
+	public DetalleServicioEstadia(int idDetalle, Estadia estadia, CatalogoServicio catalogo, int cantidad,
+			double subtotal) {
 		super();
 		this.idDetalle = idDetalle;
-		this.idEstadia = idEstadia;
-		this.idServicio = idServicio;
+		this.estadia = estadia;
+		this.catalogo = catalogo;
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
 	}
+
+
+
+	public int getIdDetalle() {
+		return idDetalle;
+	}
+
+
+
+	public void setIdDetalle(int idDetalle) {
+		this.idDetalle = idDetalle;
+	}
+
+
+
+	public Estadia getEstadia() {
+		return estadia;
+	}
+
+
+
+	public void setEstadia(Estadia estadia) {
+		this.estadia = estadia;
+	}
+
+
+
+	public CatalogoServicio getCatalogo() {
+		return catalogo;
+	}
+
+
+
+	public void setCatalogo(CatalogoServicio catalogo) {
+		this.catalogo = catalogo;
+	}
+
+
 
 	public int getidDetalle() {
 		return idDetalle;
@@ -30,21 +71,7 @@ public class DetalleServicioEstadia
 		this.idDetalle = idDetalle;
 	}
 
-	public int getidEstadia() {
-		return idEstadia;
-	}
-
-	public void setidEstadia(int idEstadia) {
-		this.idEstadia = idEstadia;
-	}
-
-	public int getidServicio() {
-		return idServicio;
-	}
-
-	public void setidServicio(int idServicio) {
-		this.idServicio = idServicio;
-	}
+	
 
 	public int getCantidad() {
 		return cantidad;

@@ -5,7 +5,8 @@ public class Huesped {
 	private String cedula;
 	private String nombre;
 	private String apellido;
-	private String telefono;	
+	private String telefono;
+	
 	
 	public Huesped() {
 		super();

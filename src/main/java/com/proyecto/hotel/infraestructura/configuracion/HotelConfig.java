@@ -57,8 +57,11 @@ public class HotelConfig {
 	}
 
 	@Bean
-	IEstadiaUseCase estadiaUseCase(IEstadiaRepositorio repositorio) {
-		return new EstadiaUseCaseImpl(repositorio);
+	IEstadiaUseCase estadiaUseCase(
+			IEstadiaRepositorio repositorio, 
+			IHuespedRepositorio huespedRepositorio, 
+			IHabitacionRepositorio habitacionRepositorio) {
+		return new EstadiaUseCaseImpl(repositorio, huespedRepositorio, habitacionRepositorio);
 	}
 
 	@Bean
@@ -90,8 +93,11 @@ public class HotelConfig {
 	}
 
 	@Bean
-	IDetalleServicioEstadiaUseCase detalleServicioEstadiaUseCase(IDetalleServicioEstadiaRepositorio repositorio) {
-		return new DetalleServicioEstadiaUseCaseImpl(repositorio);
+	IDetalleServicioEstadiaUseCase detalleServicioEstadiaUseCase(
+	        IDetalleServicioEstadiaRepositorio repositorio,
+	        IEstadiaRepositorio estadiaRepositorio,
+	        ICatalogoServicioRepositorio catalogoServicioRepositorio) {
+	    return new DetalleServicioEstadiaUseCaseImpl(repositorio, estadiaRepositorio, catalogoServicioRepositorio);
 	}
 
 }
