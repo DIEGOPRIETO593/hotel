@@ -1,14 +1,15 @@
 package com.proyecto.hotel.presentacion.dto.response;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class EstadiaResponseDTO {
     
     private Long idEstadia;
     private Long idHuesped;
     private Long idHabitacion;
-    private Timestamp fechaIngreso;
-    private Timestamp fechaSalida;
+    private LocalDateTime fechaIngreso;
+    private LocalDateTime fechaSalida;
     private Integer cantidadHuespedes;
     private Double totalPagar;
 
@@ -30,16 +31,16 @@ public class EstadiaResponseDTO {
     public void setIdHabitacion(Long idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
-    public Timestamp getFechaIngreso() {
+    public LocalDateTime getFechaIngreso() {
         return fechaIngreso;
     }
-    public void setFechaIngreso(Timestamp fechaIngreso) {
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-    public Timestamp getFechaSalida() {
+    public LocalDateTime getFechaSalida() {
         return fechaSalida;
     }
-    public void setFechaSalida(Timestamp fechaSalida) {
+    public void setFechaSalida(LocalDateTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
     public Integer getCantidadHuespedes() {

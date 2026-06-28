@@ -1,55 +1,53 @@
 package com.proyecto.hotel.dominio.entidades;
 
 public class Huesped {
-	private int id_huesped;
-	private String cedula_huesped;
-	private String nombre_huesped;
-	private String apellido_huesped;
-	private int telefono_huesed;
-	
-	
+	private int idhuesped;
+	private String cedula;
+	private String nombre;
+	private String apellido;
+	private String telefono;	
 	
 	public Huesped() {
 		super();
 	}
-	public Huesped(int id_huesped, String cedula_huesped, String nombre_huesped, String apellido_huesped,
-			int telefono_huesed) {
+	public Huesped(int id, String cedula, String nombre, String apellido,
+			String telefono) {
 		super();
-		this.id_huesped = id_huesped;
-		this.cedula_huesped = cedula_huesped;
-		this.nombre_huesped = nombre_huesped;
-		this.apellido_huesped = apellido_huesped;
-		this.telefono_huesed = telefono_huesed;
+		this.idhuesped = id;
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
 	}
-	public int getId_huesped() {
-		return id_huesped;
+	public int getId() {
+		return idhuesped;
 	}
-	public void setId_huesped(int id_huesped) {
-		this.id_huesped = id_huesped;
+	public void setId(int id) {
+		this.idhuesped = id;
 	}
-	public String getCedula_huesped() {
-		return cedula_huesped;
+	public String getCedula() {
+		return cedula;
 	}
-	public void setCedula_huesped(String cedula_huesped) {
-		this.cedula_huesped = cedula_huesped;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
-	public String getNombre_huesped() {
-		return nombre_huesped;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombre_huesped(String nombre_huesped) {
-		this.nombre_huesped = nombre_huesped;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getApellido_huesped() {
-		return apellido_huesped;
+	public String getApellido() {
+		return apellido;
 	}
-	public void setApellido_huesped(String apellido_huesped) {
-		this.apellido_huesped = apellido_huesped;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
-	public int getTelefono_huesed() {
-		return telefono_huesed;
+	public String getTelefono_huesed() {
+		return telefono;
 	}
-	public void setTelefono_huesed(int telefono_huesed) {
-		this.telefono_huesed = telefono_huesed;
+	public void setTelefono_huesed(String telefono_huesed) {
+		this.telefono = telefono_huesed;
 	}
 	
 	

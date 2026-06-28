@@ -16,10 +16,10 @@ public class CatalogoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_servicio")
-    private int id_servicio;
+    private int idServicio;
 
     @Column(name = "nombre_servicio", length = 100)
-    private String nombre_servicio;
+    private String nombreServicio;
 
     @Column(name = "tarifa") 
     private double tarifa; 

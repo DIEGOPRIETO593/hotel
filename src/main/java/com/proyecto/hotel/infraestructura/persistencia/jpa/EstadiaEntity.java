@@ -1,6 +1,6 @@
 package com.proyecto.hotel.infraestructura.persistencia.jpa;
 
-import java.time.LocalDateTime; // Cambiado a LocalDateTime ya que en tu diagrama es TIMESTAMP
+import java.time.LocalDateTime; 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,24 +17,24 @@ public class EstadiaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "id_estadia")
-    private int id_estadia;
+    private int idEstadia;
 
     @Column(name = "id_huesped")
-    private int id_huesped;
+    private int idHuesped;
 
     @Column(name = "id_habitacion")
-    private int id_habitacion;
+    private int idHabitacion;
 
     @Column(name = "fecha_ingreso") 
-    private LocalDateTime fecha_ingreso;
+    private LocalDateTime fechaIngreso;
 
     @Column(name = "fecha_salida") 
-    private LocalDateTime fecha_salida;
+    private LocalDateTime fechaSalida;
 
     @Column(name = "cantidad_huespedes") 
-    private int cantidad_huespedes;
+    private int cantidadHuespedes;
 
     @Column(name = "total_pagar")
-    private double total_pagar;
+    private double totalPagar;
     
 }

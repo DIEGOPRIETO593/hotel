@@ -2,35 +2,35 @@ package com.proyecto.hotel.dominio.entidades;
 
 public class CatalogoServicio {
 
-	private int id_servicio;
-	private String nombre_servicio;
+	private int idServicio;
+	private String nombreServicio;
 	private double tarifa;
 
 	public CatalogoServicio() {
 		super();
 	}
 
-	public CatalogoServicio(int id_servicio, String nombre_servicio, double tarifa) {
+	public CatalogoServicio(int idServicio, String nombreServicio, double tarifa) {
 		super();
-		this.id_servicio = id_servicio;
-		this.nombre_servicio = nombre_servicio;
+		this.idServicio = idServicio;
+		this.nombreServicio = nombreServicio;
 		this.tarifa = tarifa;
 	}
 
-	public int getId_servicio() {
-		return id_servicio;
+	public int getidServicio() {
+		return idServicio;
 	}
 
-	public void setId_servicio(int id_servicio) {
-		this.id_servicio = id_servicio;
+	public void setidServicio(int idServicio) {
+		this.idServicio = idServicio;
 	}
 
-	public String getNombre_servicio() {
-		return nombre_servicio;
+	public String getnombreServicio() {
+		return nombreServicio;
 	}
 
-	public void setNombre_servicio(String nombre_servicio) {
-		this.nombre_servicio = nombre_servicio;
+	public void setnombreServicio(String nombreServicio) {
+		this.nombreServicio = nombreServicio;
 	}
 
 	public double getTarifa() {

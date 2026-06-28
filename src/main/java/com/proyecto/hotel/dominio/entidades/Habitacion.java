@@ -2,62 +2,60 @@ package com.proyecto.hotel.dominio.entidades;
 
 public class Habitacion {
 
-	private int id_habitacion;
-	private int numero_habitacion;
-	private String estado_habitacion;
-	private int piso_habitacion;
-	private int estrellas_habitacion;
-	private int capacidad_habitacion;
+	private int idhabitacion;
+	private String numero;
+	private String estado;
+	private int piso;
+	private int estrellas;
+	private int capacidad;
 	public Habitacion() {
 		super();
 	}
-	public Habitacion(int id_habitacion, int numero_habitacion, String estado_habitacion, int piso_habitacion,
-			int estrellas_habitacion, int capacidad_habitacion) {
+	public Habitacion(int idhabitacion, String numero, String estado, int piso, int estrellas, int capacidad) {
 		super();
-		this.id_habitacion = id_habitacion;
-		this.numero_habitacion = numero_habitacion;
-		this.estado_habitacion = estado_habitacion;
-		this.piso_habitacion = piso_habitacion;
-		this.estrellas_habitacion = estrellas_habitacion;
-		this.capacidad_habitacion = capacidad_habitacion;
+		this.idhabitacion = idhabitacion;
+		this.numero = numero;
+		this.estado = estado;
+		this.piso = piso;
+		this.estrellas = estrellas;
+		this.capacidad = capacidad;
 	}
-	public int getId_habitacion() {
-		return id_habitacion;
+	public int getIdhabitacion() {
+		return idhabitacion;
 	}
-	public void setId_habitacion(int id_habitacion) {
-		this.id_habitacion = id_habitacion;
+	public void setIdhabitacion(int idhabitacion) {
+		this.idhabitacion = idhabitacion;
 	}
-	public int getNumero_habitacion() {
-		return numero_habitacion;
+	public String getNumero() {
+		return numero;
 	}
-	public void setNumero_habitacion(int numero_habitacion) {
-		this.numero_habitacion = numero_habitacion;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
-	public String getEstado_habitacion() {
-		return estado_habitacion;
+	public String getEstado() {
+		return estado;
 	}
-	public void setEstado_habitacion(String estado_habitacion) {
-		this.estado_habitacion = estado_habitacion;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
-	public int getPiso_habitacion() {
-		return piso_habitacion;
+	public int getPiso() {
+		return piso;
 	}
-	public void setPiso_habitacion(int piso_habitacion) {
-		this.piso_habitacion = piso_habitacion;
+	public void setPiso(int piso) {
+		this.piso = piso;
 	}
-	public int getEstrellas_habitacion() {
-		return estrellas_habitacion;
+	public int getEstrellas() {
+		return estrellas;
 	}
-	public void setEstrellas_habitacion(int estrellas_habitacion) {
-		this.estrellas_habitacion = estrellas_habitacion;
+	public void setEstrellas(int estrellas) {
+		this.estrellas = estrellas;
 	}
-	public int getCapacidad_habitacion() {
-		return capacidad_habitacion;
+	public int getCapacidad() {
+		return capacidad;
 	}
-	public void setCapacidad_habitacion(int capacidad_habitacion) {
-		this.capacidad_habitacion = capacidad_habitacion;
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
 	}
-	
 	
 	
 }

@@ -4,7 +4,7 @@ public class DetalleServicioEstadia
 {
 
 	private int id_detalle;
-	private int id_estadia;
+	private int idEstadia;
 	private int id_servicio;
 	private int cantidad;
 	private double subtotal;
@@ -13,10 +13,10 @@ public class DetalleServicioEstadia
 		super();
 	}
 
-	public DetalleServicioEstadia(int id_detalle, int id_estadia, int id_servicio, int cantidad, double subtotal) {
+	public DetalleServicioEstadia(int id_detalle, int idEstadia, int id_servicio, int cantidad, double subtotal) {
 		super();
 		this.id_detalle = id_detalle;
-		this.id_estadia = id_estadia;
+		this.idEstadia = idEstadia;
 		this.id_servicio = id_servicio;
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
@@ -30,12 +30,12 @@ public class DetalleServicioEstadia
 		this.id_detalle = id_detalle;
 	}
 
-	public int getId_estadia() {
-		return id_estadia;
+	public int getidEstadia() {
+		return idEstadia;
 	}
 
-	public void setId_estadia(int id_estadia) {
-		this.id_estadia = id_estadia;
+	public void setidEstadia(int idEstadia) {
+		this.idEstadia = idEstadia;
 	}
 
 	public int getId_servicio() {
