@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class HuespedRequestDTO {
-    private int idHuesped;
+    private int idhuesped;
     
     @NotBlank
     private String cedula;
