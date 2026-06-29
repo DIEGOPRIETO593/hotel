@@ -34,8 +34,8 @@ public class CatalogoServicioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
         catalogoUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(java.util.Map.of("mensaje", "Servicio eliminado correctamente"));
     }
 }

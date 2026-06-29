@@ -4,41 +4,30 @@ import java.util.List;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IEstadiaUseCase;
 import com.proyecto.hotel.dominio.entidades.Estadia;
 import com.proyecto.hotel.dominio.entidades.Habitacion;
-import com.proyecto.hotel.dominio.entidades.Huesped;
 import com.proyecto.hotel.dominio.repositorios.IEstadiaRepositorio;
 import com.proyecto.hotel.dominio.repositorios.IHabitacionRepositorio;
-import com.proyecto.hotel.dominio.repositorios.IHuespedRepositorio;
 
 public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     private final IEstadiaRepositorio repositorio;
-    private final IHuespedRepositorio huespedRepositorio;
-    private final IHabitacionRepositorio habitacionRepository;
+    private final IHabitacionRepositorio habitacionRepositorio;
 
-    // Inyecta los tres repositorios en el constructor
-    public EstadiaUseCaseImpl(IEstadiaRepositorio repositorio, 
-                              IHuespedRepositorio huespedRepositorio, 
-                              IHabitacionRepositorio habitacionRepository) {
+    public EstadiaUseCaseImpl(IEstadiaRepositorio repositorio, IHabitacionRepositorio habitacionRepositorio) {
+        super();
         this.repositorio = repositorio;
-        this.huespedRepositorio = huespedRepositorio;
-        this.habitacionRepository = habitacionRepository;
+        this.habitacionRepositorio = habitacionRepositorio;
     }
 
     @Override
     public Estadia guardar(Estadia nuevaEstadia) {
-        //Recuperamos el Huesped persistido real usando el ID que armó el Mapper
-        Huesped huespedReal = huespedRepositorio.buscarPorId(nuevaEstadia.getHuesped().getidHuesped())
-                .orElseThrow(() -> new RuntimeException("El huésped especificado no existe"));
+        Habitacion habitacion = habitacionRepositorio.buscarPorId(nuevaEstadia.getIdHabitacion())
+                .orElseThrow(() -> new RuntimeException("La habitación con ID " + nuevaEstadia.getIdHabitacion() + " no existe."));
 
-        //Recuperamos la Habitacion persistida real
-        Habitacion habitacionReal = habitacionRepository.buscarPorId(nuevaEstadia.getHabitacion().getIdhabitacion())
-                .orElseThrow(() -> new RuntimeException("La habitación especificada no existe"));
+        if ("OCUPADA".equalsIgnoreCase(habitacion.getEstado()) || 
+            "EN MANTENIMIENTO".equalsIgnoreCase(habitacion.getEstado())) {
+            throw new RuntimeException("No se puede registrar la estadía. La habitación se encuentra " + habitacion.getEstado());
+        }
 
-        
-        nuevaEstadia.setHuesped(huespedReal);
-        nuevaEstadia.setHabitacion(habitacionReal);
-
-        //objeto va completamente consistente hacia la persistencia
         return repositorio.guardar(nuevaEstadia);
     }
 
@@ -55,6 +44,10 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     @Override
     public void eliminar(int idEstadia) {
+        if (!repositorio.buscarPorId(idEstadia).isPresent()) {
+            throw new RuntimeException("Estadía no encontrada");
+        }
         repositorio.eliminar(idEstadia);
     }
 }
+

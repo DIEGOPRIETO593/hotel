@@ -33,6 +33,9 @@ public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
 
     @Override
     public void eliminar(int idServicio) {
+        if (!repositorio.buscarPorId(idServicio).isPresent()) {
+            throw new RuntimeException("Servicio no encontrado en el catálogo");
+        }
         repositorio.eliminar(idServicio);
     }
 }

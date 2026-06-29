@@ -8,15 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data 
+@Data
 @Entity
 @Table(name = "habitacion")
 public class HabitacionEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "id_habitacion")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     
-    private int idhabitacion;
+    private int idHabitacion;
 
     @Column(name = "numero", length = 10)
     private String numero;
@@ -25,11 +25,11 @@ public class HabitacionEntity {
     private String estado;
 
     @Column(name = "piso") 
-    private Integer piso;
+    private int piso;
 
     @Column(name = "estrellas") 
-    private Integer estrellas;
+    private int estrellas;
 
     @Column(name = "capacidad")
-    private Integer capacidad;
+    private int capacidad;
 }

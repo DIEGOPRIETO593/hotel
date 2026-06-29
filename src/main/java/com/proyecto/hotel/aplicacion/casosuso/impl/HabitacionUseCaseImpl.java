@@ -32,6 +32,9 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     @Override
     public void eliminar(int idHabitacion) {
+        if (!repositorio.buscarPorId(idHabitacion).isPresent()) {
+            throw new RuntimeException("Habitación no encontrada");
+        }
         repositorio.eliminar(idHabitacion);
     }
 }
