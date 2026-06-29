@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/habitacion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HabitacionController {
     
     private final IHabitacionUseCase habitacionUseCase;
