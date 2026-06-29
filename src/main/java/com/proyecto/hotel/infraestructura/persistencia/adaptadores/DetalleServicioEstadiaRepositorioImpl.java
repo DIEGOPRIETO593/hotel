@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
 import com.proyecto.hotel.dominio.repositorios.IDetalleServicioEstadiaRepositorio;
-import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicoEntity; // Importante: Tu entidad se llama "Servico"
+import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicioEntity; 
 import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IDetalleServicioEstadiaJpaMapper;
 import com.proyecto.hotel.infraestructura.repositorios.IDetalleServicioJpaRepositorio;
-
 
 public class DetalleServicioEstadiaRepositorioImpl implements IDetalleServicioEstadiaRepositorio {
 	
@@ -27,8 +26,8 @@ public class DetalleServicioEstadiaRepositorioImpl implements IDetalleServicioEs
 
 	@Override
 	public DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle) {
-		DetalleServicoEntity entity = entityMapper.toEntity(nuevoDetalle);
-		DetalleServicoEntity guardado = jpaRepositorio.save(entity);		
+		DetalleServicioEntity entity = entityMapper.toEntity(nuevoDetalle);
+		DetalleServicioEntity guardado = jpaRepositorio.save(entity);		
 		return entityMapper.toDomain(guardado);
 	}
 

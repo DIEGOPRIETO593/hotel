@@ -7,8 +7,7 @@ import com.proyecto.hotel.infraestructura.persistencia.jpa.HabitacionEntity;
 @Mapper(componentModel = "Spring")
 public interface IHabitacionJpaMapper {
 
-	HabitacionEntity toEntity(Habitacion domain);
 	Habitacion toDomain(HabitacionEntity entity);
 	
-	
+	HabitacionEntity toEntity(Habitacion domain);
 }

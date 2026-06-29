@@ -20,6 +20,15 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
     }
 
     @Override
+    public Habitacion actualizar(int idHabitacion, Habitacion habitacionActualizada) {
+        repositorio.buscarPorId(idHabitacion)
+                .orElseThrow(() -> new RuntimeException("Habitación no encontrada"));
+        
+        habitacionActualizada.setIdHabitacion(idHabitacion);
+        return repositorio.guardar(habitacionActualizada);
+    }
+
+    @Override
     public Habitacion buscarPorId(int idHabitacion) {
         return repositorio.buscarPorId(idHabitacion)
                 .orElseThrow(() -> new RuntimeException("Habitación no encontrada"));
@@ -32,6 +41,9 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     @Override
     public void eliminar(int idHabitacion) {
+        if (!repositorio.buscarPorId(idHabitacion).isPresent()) {
+            throw new RuntimeException("Habitación no encontrada");
+        }
         repositorio.eliminar(idHabitacion);
     }
 }

@@ -29,14 +29,19 @@ public class EstadiaController {
         return estadiaMapper.toResponseDto(estadiaUseCase.guardar(estadiaMapper.toDomain(estadiaRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public EstadiaResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody EstadiaRequestDTO estadiaRequestDto) {
+        return estadiaMapper.toResponseDto(estadiaUseCase.actualizar(id, estadiaMapper.toDomain(estadiaRequestDto)));
+    }
+
     @GetMapping
     public List<EstadiaResponseDTO> listarTodo() {
         return estadiaUseCase.listarTodos().stream().map(estadiaMapper::toResponseDto).toList();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
         estadiaUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(java.util.Map.of("mensaje", "Estadía eliminada correctamente"));
     }
 }

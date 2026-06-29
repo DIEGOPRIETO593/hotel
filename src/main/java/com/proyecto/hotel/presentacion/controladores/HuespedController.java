@@ -30,14 +30,19 @@ public class HuespedController {
         return huespedMapper.toResponseDto(huespedUseCase.guardar(huespedMapper.toDomain(huespedRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public HuespedResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody HuespedRequestDTO huespedRequestDto) {
+        return huespedMapper.toResponseDto(huespedUseCase.actualizar(id, huespedMapper.toDomain(huespedRequestDto)));
+    }
+
     @GetMapping
     public List<HuespedResponseDTO> listarTodo() {
         return huespedUseCase.listarTodos().stream().map(huespedMapper::toResponseDto).toList();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
         huespedUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(java.util.Map.of("mensaje", "Huésped eliminado correctamente"));
     }
 }

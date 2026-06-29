@@ -5,6 +5,7 @@ import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
 
 public interface IDetalleServicioEstadiaUseCase {
     DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle);
+    DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia detalleActualizado);
     DetalleServicioEstadia buscarPorId(int idDetalle);
     List<DetalleServicioEstadia> listarTodos();
     void eliminar(int idDetalle);

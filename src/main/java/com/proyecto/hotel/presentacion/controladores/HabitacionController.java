@@ -29,14 +29,19 @@ public class HabitacionController {
         return habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public HabitacionResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
+        return habitacionMapper.toResponseDto(habitacionUseCase.actualizar(id, habitacionMapper.toDomain(habitacionRequestDto)));
+    }
+
     @GetMapping
     public List<HabitacionResponseDTO> listarTodo() {
         return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
         habitacionUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(java.util.Map.of("mensaje", "Habitación eliminada correctamente"));
     }
 }

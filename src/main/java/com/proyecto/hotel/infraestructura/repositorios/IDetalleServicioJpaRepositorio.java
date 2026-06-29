@@ -2,10 +2,12 @@ package com.proyecto.hotel.infraestructura.repositorios;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicoEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicioEntity;
 
-public interface IDetalleServicioJpaRepositorio extends JpaRepository<DetalleServicoEntity, Integer> {
+public interface IDetalleServicioJpaRepositorio extends JpaRepository<DetalleServicioEntity, Integer> {
     
-    // Spring Data genera automáticamente la consulta navegando a estadia -> idEstadia
-    List<DetalleServicoEntity> findByEstadia_IdEstadia(int idEstadia);
+    @Query("SELECT d FROM DetalleServicioEntity d WHERE d.estadia.idEstadia = :idEstadia")
+    List<DetalleServicioEntity> findByIdEstadia(@Param("idEstadia") int idEstadia);
 }

@@ -29,14 +29,19 @@ public class DetalleServicioEstadiaController {
         return detalleMapper.toResponseDto(detalleUseCase.guardar(detalleMapper.toDomain(detalleRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public DetalleServicioEstadiaResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto) {
+        return detalleMapper.toResponseDto(detalleUseCase.actualizar(id, detalleMapper.toDomain(detalleRequestDto)));
+    }
+
     @GetMapping
     public List<DetalleServicioEstadiaResponseDTO> listarTodo() {
         return detalleUseCase.listarTodos().stream().map(detalleMapper::toResponseDto).toList();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
         detalleUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(java.util.Map.of("mensaje", "Detalle eliminado correctamente"));
     }
 }

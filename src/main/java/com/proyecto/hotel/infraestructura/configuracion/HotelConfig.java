@@ -56,13 +56,10 @@ public class HotelConfig {
 		return new EstadiaRepositorioImpl(jpaRepository, mapper);
 	}
 
-	@Bean
-	IEstadiaUseCase estadiaUseCase(
-			IEstadiaRepositorio repositorio, 
-			IHuespedRepositorio huespedRepositorio, 
-			IHabitacionRepositorio habitacionRepositorio) {
-		return new EstadiaUseCaseImpl(repositorio, huespedRepositorio, habitacionRepositorio);
-	}
+    @Bean
+    public IEstadiaUseCase estadiaUseCase(IEstadiaRepositorio repositorio, IHabitacionRepositorio habitacionRepositorio) {
+        return new EstadiaUseCaseImpl(repositorio, habitacionRepositorio);
+    }
 
 	@Bean
 	IHabitacionRepositorio habitacionRepositorio(IHabitacionJpaRepositorio jpaRepository, IHabitacionJpaMapper mapper) {
@@ -93,11 +90,8 @@ public class HotelConfig {
 	}
 
 	@Bean
-	IDetalleServicioEstadiaUseCase detalleServicioEstadiaUseCase(
-	        IDetalleServicioEstadiaRepositorio repositorio,
-	        IEstadiaRepositorio estadiaRepositorio,
-	        ICatalogoServicioRepositorio catalogoServicioRepositorio) {
-	    return new DetalleServicioEstadiaUseCaseImpl(repositorio, estadiaRepositorio, catalogoServicioRepositorio);
+	IDetalleServicioEstadiaUseCase detalleServicioEstadiaUseCase(IDetalleServicioEstadiaRepositorio repositorio) {
+		return new DetalleServicioEstadiaUseCaseImpl(repositorio);
 	}
 
 }

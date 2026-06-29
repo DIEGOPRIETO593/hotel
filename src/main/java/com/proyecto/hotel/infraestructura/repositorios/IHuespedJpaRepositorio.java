@@ -9,7 +9,6 @@ import com.proyecto.hotel.infraestructura.persistencia.jpa.HuespedEntity;
 
 public interface IHuespedJpaRepositorio extends JpaRepository<HuespedEntity, Integer>{
 
-	Optional<Huesped> findByCedula(String cedula);
-	
+	Optional<HuespedEntity> findByCedula(String cedula);
 
 }
