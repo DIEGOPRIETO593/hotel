@@ -28,6 +28,11 @@ public class CatalogoServicioController {
         return catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
     }
 
+    @PutMapping("/{id}")
+    public CatalogoServicioResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody CatalogoServicioRequestDTO catalogoRequestDto) {
+        return catalogoMapper.toResponseDto(catalogoUseCase.actualizar(id, catalogoMapper.toDomain(catalogoRequestDto)));
+    }
+
     @GetMapping
     public List<CatalogoServicioResponseDTO> listarTodo() {
         return catalogoUseCase.listarTodos().stream().map(catalogoMapper::toResponseDto).toList();

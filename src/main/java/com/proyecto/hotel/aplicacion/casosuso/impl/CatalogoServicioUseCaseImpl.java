@@ -21,6 +21,15 @@ public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
     }
 
     @Override
+    public CatalogoServicio actualizar(int idServicio, CatalogoServicio servicioActualizado) {
+        repositorio.buscarPorId(idServicio)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado en el catálogo"));
+        
+        servicioActualizado.setIdServicio(idServicio);
+        return repositorio.guardar(servicioActualizado);
+    }
+
+    @Override
     public CatalogoServicio buscarPorId(int idServicio) {
         return repositorio.buscarPorId(idServicio)
                 .orElseThrow(() -> new RuntimeException("Servicio no encontrado en el catálogo"));

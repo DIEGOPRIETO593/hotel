@@ -29,6 +29,11 @@ public class DetalleServicioEstadiaController {
         return detalleMapper.toResponseDto(detalleUseCase.guardar(detalleMapper.toDomain(detalleRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public DetalleServicioEstadiaResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto) {
+        return detalleMapper.toResponseDto(detalleUseCase.actualizar(id, detalleMapper.toDomain(detalleRequestDto)));
+    }
+
     @GetMapping
     public List<DetalleServicioEstadiaResponseDTO> listarTodo() {
         return detalleUseCase.listarTodos().stream().map(detalleMapper::toResponseDto).toList();

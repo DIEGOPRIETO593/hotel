@@ -30,6 +30,11 @@ public class HuespedController {
         return huespedMapper.toResponseDto(huespedUseCase.guardar(huespedMapper.toDomain(huespedRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public HuespedResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody HuespedRequestDTO huespedRequestDto) {
+        return huespedMapper.toResponseDto(huespedUseCase.actualizar(id, huespedMapper.toDomain(huespedRequestDto)));
+    }
+
     @GetMapping
     public List<HuespedResponseDTO> listarTodo() {
         return huespedUseCase.listarTodos().stream().map(huespedMapper::toResponseDto).toList();

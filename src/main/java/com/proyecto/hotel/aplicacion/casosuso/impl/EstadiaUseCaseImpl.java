@@ -32,6 +32,18 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
     }
 
     @Override
+    public Estadia actualizar(int idEstadia, Estadia estadiaActualizada) {
+        repositorio.buscarPorId(idEstadia)
+                .orElseThrow(() -> new RuntimeException("Estadía no encontrada"));
+
+        Habitacion habitacion = habitacionRepositorio.buscarPorId(estadiaActualizada.getIdHabitacion())
+                .orElseThrow(() -> new RuntimeException("La habitación con ID " + estadiaActualizada.getIdHabitacion() + " no existe."));
+
+        estadiaActualizada.setIdEstadia(idEstadia);
+        return repositorio.guardar(estadiaActualizada);
+    }
+
+    @Override
     public Estadia buscarPorId(int idEstadia) {
         return repositorio.buscarPorId(idEstadia)
                 .orElseThrow(() -> new RuntimeException("Estadía no encontrada"));

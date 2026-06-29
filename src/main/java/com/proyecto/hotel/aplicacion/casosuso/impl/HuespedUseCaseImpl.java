@@ -23,6 +23,21 @@ public class HuespedUseCaseImpl implements IHuespedUseCase {
     }
 
     @Override
+    public Huesped actualizar(int idHuesped, Huesped huespedActualizado) {
+        Huesped huespedExistente = repositorio.buscarPorId(idHuesped)
+                .orElseThrow(() -> new RuntimeException("Huésped no encontrado"));
+        
+        if (!huespedExistente.getCedula().equals(huespedActualizado.getCedula())) {
+            if (repositorio.buscarPorCedula(huespedActualizado.getCedula()).isPresent()) {
+                throw new RuntimeException("Ya existe un huésped registrado con la cédula: " + huespedActualizado.getCedula());
+            }
+        }
+        
+        huespedActualizado.setIdHuesped(idHuesped);
+        return repositorio.guardar(huespedActualizado);
+    }
+
+    @Override
     public Huesped buscarPorId(int idHuesped) {
         return repositorio.buscarPorId(idHuesped)
                 .orElseThrow(() -> new RuntimeException("Huésped no encontrado"));

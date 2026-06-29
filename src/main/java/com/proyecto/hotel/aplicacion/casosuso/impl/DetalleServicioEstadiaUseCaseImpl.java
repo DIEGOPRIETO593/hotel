@@ -20,6 +20,21 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     }
 
     @Override
+    public DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia detalleActualizado) {
+        repositorio.buscarPorId(idDetalle)
+                .orElseThrow(() -> new RuntimeException("Detalle de servicio no encontrado"));
+
+        estadiaRepositorio.buscarPorId(detalleActualizado.getIdEstadia())
+                .orElseThrow(() -> new RuntimeException("La estadía con ID " + detalleActualizado.getIdEstadia() + " no existe."));
+
+        catalogoRepositorio.buscarPorId(detalleActualizado.getIdServicio())
+                .orElseThrow(() -> new RuntimeException("El servicio con ID " + detalleActualizado.getIdServicio() + " no existe."));
+
+        detalleActualizado.setIdDetalle(idDetalle);
+        return repositorio.guardar(detalleActualizado);
+    }
+
+    @Override
     public DetalleServicioEstadia buscarPorId(int idDetalle) {
         return repositorio.buscarPorId(idDetalle)
                 .orElseThrow(() -> new RuntimeException("Detalle de servicio de estadía no encontrado"));

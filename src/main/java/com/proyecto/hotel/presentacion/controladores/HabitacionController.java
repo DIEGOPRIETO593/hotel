@@ -29,6 +29,11 @@ public class HabitacionController {
         return habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public HabitacionResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
+        return habitacionMapper.toResponseDto(habitacionUseCase.actualizar(id, habitacionMapper.toDomain(habitacionRequestDto)));
+    }
+
     @GetMapping
     public List<HabitacionResponseDTO> listarTodo() {
         return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();

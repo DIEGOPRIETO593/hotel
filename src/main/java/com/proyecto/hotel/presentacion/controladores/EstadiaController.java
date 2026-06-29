@@ -29,6 +29,11 @@ public class EstadiaController {
         return estadiaMapper.toResponseDto(estadiaUseCase.guardar(estadiaMapper.toDomain(estadiaRequestDto)));
     }
 
+    @PutMapping("/{id}")
+    public EstadiaResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody EstadiaRequestDTO estadiaRequestDto) {
+        return estadiaMapper.toResponseDto(estadiaUseCase.actualizar(id, estadiaMapper.toDomain(estadiaRequestDto)));
+    }
+
     @GetMapping
     public List<EstadiaResponseDTO> listarTodo() {
         return estadiaUseCase.listarTodos().stream().map(estadiaMapper::toResponseDto).toList();
