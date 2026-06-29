@@ -21,9 +21,11 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     @Override
     public Habitacion actualizar(int idHabitacion, Habitacion habitacionActualizada) {
+        // 1. Validamos que la habitación exista antes de intentar actualizarla
         repositorio.buscarPorId(idHabitacion)
                 .orElseThrow(() -> new RuntimeException("Habitación no encontrada"));
         
+        // 2. Se inyecta el ID original de la ruta para asegurar la actualización del registro correcto
         habitacionActualizada.setIdHabitacion(idHabitacion);
         return repositorio.guardar(habitacionActualizada);
     }

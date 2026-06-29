@@ -33,12 +33,15 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     @Override
     public Estadia actualizar(int idEstadia, Estadia estadiaActualizada) {
+        // 1. Verificamos que la estadía exista
         repositorio.buscarPorId(idEstadia)
                 .orElseThrow(() -> new RuntimeException("Estadía no encontrada"));
 
+        // 2. Verificamos que la nueva habitación asignada exista (en caso de que hayan cambiado de habitación)
         Habitacion habitacion = habitacionRepositorio.buscarPorId(estadiaActualizada.getIdHabitacion())
                 .orElseThrow(() -> new RuntimeException("La habitación con ID " + estadiaActualizada.getIdHabitacion() + " no existe."));
 
+        // 3. Mantenemos el ID original para que JPA realice un UPDATE
         estadiaActualizada.setIdEstadia(idEstadia);
         return repositorio.guardar(estadiaActualizada);
     }

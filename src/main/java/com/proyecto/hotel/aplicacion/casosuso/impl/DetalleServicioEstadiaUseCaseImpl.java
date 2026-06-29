@@ -21,9 +21,11 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
 
     @Override
     public DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia detalleActualizado) {
+        // 1. Validamos la existencia del registro antes de editar
         repositorio.buscarPorId(idDetalle)
                 .orElseThrow(() -> new RuntimeException("Detalle de servicio no encontrado"));
 
+        // 2. Inyectamos el ID original para que Spring Data JPA efectúe un UPDATE
         detalleActualizado.setIdDetalle(idDetalle);
         return repositorio.guardar(detalleActualizado);
     }

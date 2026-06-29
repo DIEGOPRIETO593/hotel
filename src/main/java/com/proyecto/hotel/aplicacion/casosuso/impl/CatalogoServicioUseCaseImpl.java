@@ -22,9 +22,11 @@ public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
 
     @Override
     public CatalogoServicio actualizar(int idServicio, CatalogoServicio servicioActualizado) {
+        // 1. Verificamos que el servicio a editar exista en el catálogo
         repositorio.buscarPorId(idServicio)
                 .orElseThrow(() -> new RuntimeException("Servicio no encontrado en el catálogo"));
         
+        // 2. Conservamos el ID original del path para realizar un UPDATE
         servicioActualizado.setIdServicio(idServicio);
         return repositorio.guardar(servicioActualizado);
     }
