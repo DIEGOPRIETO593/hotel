@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/detalle")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DetalleServicioEstadiaController {
     
     private final IDetalleServicioEstadiaUseCase detalleUseCase;

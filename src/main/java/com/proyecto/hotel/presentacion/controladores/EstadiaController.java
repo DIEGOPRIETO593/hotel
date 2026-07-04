@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/estadia")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EstadiaController {
     
     private final IEstadiaUseCase estadiaUseCase;
