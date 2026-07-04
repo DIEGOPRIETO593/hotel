@@ -26,19 +26,20 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     @Override
     public Estadia guardar(Estadia nuevaEstadia) {
-        //Recuperamos el Huesped persistido real usando el ID que armó el Mapper
+        // Recuperamos el Huesped persistido real usando el ID corregido en CamelCase
         Huesped huespedReal = huespedRepositorio.buscarPorId(nuevaEstadia.getHuesped().getidHuesped())
                 .orElseThrow(() -> new RuntimeException("El huésped especificado no existe"));
 
-        //Recuperamos la Habitacion persistida real
+        // Recuperamos la Habitacion persistida real
         Habitacion habitacionReal = habitacionRepository.buscarPorId(nuevaEstadia.getHabitacion().getIdhabitacion())
                 .orElseThrow(() -> new RuntimeException("La habitación especificada no existe"));
 
-        
         nuevaEstadia.setHuesped(huespedReal);
         nuevaEstadia.setHabitacion(habitacionReal);
+        
 
-        //objeto va completamente consistente hacia la persistencia
+        
+        // Objeto va completamente consistente hacia la persistencia
         return repositorio.guardar(nuevaEstadia);
     }
 
