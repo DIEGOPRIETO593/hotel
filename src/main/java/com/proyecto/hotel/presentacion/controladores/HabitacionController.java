@@ -13,30 +13,42 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("api/habitacion")
 public class HabitacionController {
-    
-    private final IHabitacionUseCase habitacionUseCase;
-    private final IHabitacionDtoMapper habitacionMapper;
 
-    public HabitacionController(IHabitacionUseCase habitacionUseCase, IHabitacionDtoMapper habitacionMapper) {
-        super();
-        this.habitacionUseCase = habitacionUseCase;
-        this.habitacionMapper = habitacionMapper;
-    }
-    
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public HabitacionResponseDTO guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
-        return habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
-    }
+	private final IHabitacionUseCase habitacionUseCase;
+	private final IHabitacionDtoMapper habitacionMapper;
 
-    @GetMapping
-    public List<HabitacionResponseDTO> listarTodo() {
-        return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
-    }
+	public HabitacionController(IHabitacionUseCase habitacionUseCase, IHabitacionDtoMapper habitacionMapper) {
+		super();
+		this.habitacionUseCase = habitacionUseCase;
+		this.habitacionMapper = habitacionMapper;
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
-        habitacionUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
-    }
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public HabitacionResponseDTO guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
+		return habitacionMapper
+				.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
+	}
+
+	@GetMapping
+	public List<HabitacionResponseDTO> listarTodo() {
+		return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable int id) {
+		habitacionUseCase.eliminar(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	
+	
+	//verificar si la habitacion esta con estado dispoible
+	@GetMapping("/buscar")
+	public List<HabitacionResponseDTO> buscarHabitaciones(
+			@RequestParam(required = false, defaultValue = "0") String estado) {
+
+		return habitacionUseCase.buscarPorEstado(estado).stream().map(habitacionMapper::toResponseDto).toList();
+
+	}
 }
