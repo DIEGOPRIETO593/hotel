@@ -15,7 +15,7 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
     private final IHuespedRepositorio huespedRepositorio;
     private final IHabitacionRepositorio habitacionRepository;
 
-    // Inyecta los tres repositorios en el constructor
+
     public EstadiaUseCaseImpl(IEstadiaRepositorio repositorio, 
                               IHuespedRepositorio huespedRepositorio, 
                               IHabitacionRepositorio habitacionRepository) {
@@ -57,5 +57,20 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
     @Override
     public void eliminar(int idEstadia) {
         repositorio.eliminar(idEstadia);
+    }
+    
+    @Override
+    public Estadia actualizar(int idEstadia, Estadia datosActualizados) {
+    	Estadia estadiaExistente = buscarPorId(idEstadia);
+        estadiaExistente.setCantidadHuespedes(datosActualizados.getCantidadHuespedes());
+        estadiaExistente.setFechaIngreso(datosActualizados.getFechaIngreso());
+        estadiaExistente.setHabitacion(datosActualizados.getHabitacion());
+        estadiaExistente.setFechaSalida(datosActualizados.getFechaSalida());
+        estadiaExistente.setHabitacion(datosActualizados.getHabitacion());
+        estadiaExistente.setHuesped(datosActualizados.getHuesped());
+        estadiaExistente.setIdEstadia(datosActualizados.getIdEstadia());
+        estadiaExistente.setTotalPagar(datosActualizados.getTotalPagar());
+        
+        return repositorio.guardar(estadiaExistente);
     }
 }

@@ -34,4 +34,12 @@ public class HuespedUseCaseImpl implements IHuespedUseCase {
     public void eliminar(int idHuesped) {
         repositorio.eliminar(idHuesped);
     }
+    @Override
+    public Huesped actualizar(int idHuesped, Huesped datosActualizados) {
+        Huesped huespedExistente = buscarPorId(idHuesped);
+        huespedExistente.setNombre(datosActualizados.getNombre());
+        huespedExistente.setApellido(datosActualizados.getApellido());
+        huespedExistente.setTelefono(datosActualizados.getTelefono());
+        return repositorio.guardar(huespedExistente);
+    }
 }

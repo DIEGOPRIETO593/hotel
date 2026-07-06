@@ -53,4 +53,15 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     public void eliminar(int idDetalle) {
         repositorio.eliminar(idDetalle);
     }
+    
+    @Override
+    public DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia datosActualizados) {
+    	DetalleServicioEstadia detalleExistente = buscarPorId(idDetalle);
+    	detalleExistente.setCantidad(datosActualizados.getCantidad());
+    	detalleExistente.setCatalogo(datosActualizados.getCatalogo());
+    	detalleExistente.setEstadia(datosActualizados.getEstadia());
+    	detalleExistente.setidDetalle(datosActualizados.getIdDetalle());
+    	detalleExistente.setSubtotal(datosActualizados.getSubtotal());
+        return repositorio.guardar(detalleExistente);
+    }
 }

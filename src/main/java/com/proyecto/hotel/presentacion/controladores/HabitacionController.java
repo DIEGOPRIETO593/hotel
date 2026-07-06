@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IHabitacionUseCase;
 import com.proyecto.hotel.presentacion.dto.request.HabitacionRequestDTO;
+import com.proyecto.hotel.presentacion.dto.request.HuespedRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.HabitacionResponseDTO;
+import com.proyecto.hotel.presentacion.dto.response.HuespedResponseDTO;
 import com.proyecto.hotel.presentacion.mapeadores.IHabitacionDtoMapper;
 import jakarta.validation.Valid;
 
@@ -30,6 +32,15 @@ public class HabitacionController {
 		return habitacionMapper
 				.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
 	}
+	
+	@PutMapping("/{id}")
+    public HabitacionResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) { 
+        var habitacionDomain = habitacionMapper.toDomain(habitacionRequestDto);
+        var resultado = habitacionUseCase.actualizar(id, habitacionDomain);
+        return habitacionMapper.toResponseDto(resultado);
+    }
 
 	@GetMapping
 	public List<HabitacionResponseDTO> listarTodo() {

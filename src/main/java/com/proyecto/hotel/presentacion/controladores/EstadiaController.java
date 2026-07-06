@@ -29,6 +29,16 @@ public class EstadiaController {
     public EstadiaResponseDTO guardar(@Valid @RequestBody EstadiaRequestDTO estadiaRequestDto) {
         return estadiaMapper.toResponseDto(estadiaUseCase.guardar(estadiaMapper.toDomain(estadiaRequestDto)));
     }
+    
+    @PutMapping("/{id}")
+    public EstadiaResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody EstadiaRequestDTO estadiaRequestDto) {
+        
+        var estadiaDomain = estadiaMapper.toDomain(estadiaRequestDto);
+        var resultado = estadiaUseCase.actualizar(id, estadiaDomain);
+        return estadiaMapper.toResponseDto(resultado);
+    }
 
     @GetMapping
     public List<EstadiaResponseDTO> listarTodo() {

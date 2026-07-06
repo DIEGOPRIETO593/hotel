@@ -28,6 +28,15 @@ public class CatalogoServicioController {
     public CatalogoServicioResponseDTO guardar(@Valid @RequestBody CatalogoServicioRequestDTO dto) {
         return catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
     }
+    
+    @PutMapping("/{id}")
+    public CatalogoServicioResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody CatalogoServicioRequestDTO catalogoRequestDto) {
+        var catalogoDomain = catalogoMapper.toDomain(catalogoRequestDto);
+        var resultado = catalogoUseCase.actualizar(id, catalogoDomain);
+        return catalogoMapper.toResponseDto(resultado);
+    }
 
     @GetMapping
     public List<CatalogoServicioResponseDTO> listarTodo() {
