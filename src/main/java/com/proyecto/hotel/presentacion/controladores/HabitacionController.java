@@ -55,7 +55,6 @@ public class HabitacionController {
 
 	
 	
-	//verificar si la habitacion esta con estado dispoible
 	@GetMapping("/buscar")
 	public List<HabitacionResponseDTO> buscarHabitaciones(
 			@RequestParam(required = false, defaultValue = "0") String estado) {

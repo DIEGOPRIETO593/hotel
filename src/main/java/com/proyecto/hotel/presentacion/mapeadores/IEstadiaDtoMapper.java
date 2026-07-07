@@ -1,5 +1,8 @@
 package com.proyecto.hotel.presentacion.mapeadores;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -17,4 +20,6 @@ public interface IEstadiaDtoMapper {
 	@Mapping(target = "idHuesped", source = "huesped.idHuesped")
     @Mapping(target = "idHabitacion", source = "habitacion.idhabitacion")
 	EstadiaResponseDTO toResponseDto(Estadia entity);
+	
+	
 }

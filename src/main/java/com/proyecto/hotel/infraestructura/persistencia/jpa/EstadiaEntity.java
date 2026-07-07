@@ -21,12 +21,12 @@ public class EstadiaEntity {
 	@Column(name = "id_estadia")
 	private int idEstadia;
 
-	// Relacion con Huesped
+	
 	@ManyToOne
 	@JoinColumn(name = "id_huesped", nullable = false)
 	private HuespedEntity huesped;
 
-	// Relacion con Habitacion
+	
 	@ManyToOne
 	@JoinColumn(name = "id_habitacion", nullable = false)
 	private HabitacionEntity habitacion;
