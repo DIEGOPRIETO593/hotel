@@ -1,8 +1,10 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
 import java.util.List;
+
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IHabitacionUseCase;
 import com.proyecto.hotel.dominio.entidades.Habitacion;
+import com.proyecto.hotel.dominio.entidades.Huesped;
 import com.proyecto.hotel.dominio.repositorios.IHabitacionRepositorio;
 
 public class HabitacionUseCaseImpl implements IHabitacionUseCase {
@@ -34,8 +36,27 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
     public void eliminar(int idHabitacion) {
         repositorio.eliminar(idHabitacion);
     }
+
     @Override
-    public Habitacion actualizar(int id, Habitacion entidad) {
-        return repositorio.guardar(entidad);
+    public List<Habitacion> buscarPorEstado(String estado) {
+        return repositorio.buscarPorEstado(estado);
     }
+
+	@Override
+	public List<Habitacion> buscarCapacidad(int capacidad) {
+		// TODO Auto-generated method stub
+		return repositorio.buscarCapacidad(capacidad);
+	}
+	@Override
+    public Habitacion actualizar(int idHabitacion, Habitacion datosActualizados) {
+		Habitacion habitacionExistente = buscarPorId(idHabitacion);
+		habitacionExistente.setNumero(datosActualizados.getNumero());
+		habitacionExistente.setCapacidad(datosActualizados.getCapacidad());
+		habitacionExistente.setEstado(datosActualizados.getEstado());
+		habitacionExistente.setEstrellas(datosActualizados.getEstrellas());
+		habitacionExistente.setPiso(datosActualizados.getPiso());
+        return repositorio.guardar(habitacionExistente);
+    }
+
+     
 }

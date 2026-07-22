@@ -24,11 +24,24 @@ public class HuespedController {
         this.huespedMapper = huespedMapper;
     }
     
+    
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public HuespedResponseDTO guardar(@Valid @RequestBody HuespedRequestDTO huespedRequestDto) {
         return huespedMapper.toResponseDto(huespedUseCase.guardar(huespedMapper.toDomain(huespedRequestDto)));
     }
+    
+    
+    @PutMapping("/{id}")
+    public HuespedResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody HuespedRequestDTO huespedRequestDto) {
+        var huespedDomain = huespedMapper.toDomain(huespedRequestDto);
+        var resultado = huespedUseCase.actualizar(id, huespedDomain);
+        return huespedMapper.toResponseDto(resultado);
+    }
+    
+    
 
     @GetMapping
     public List<HuespedResponseDTO> listarTodo() {

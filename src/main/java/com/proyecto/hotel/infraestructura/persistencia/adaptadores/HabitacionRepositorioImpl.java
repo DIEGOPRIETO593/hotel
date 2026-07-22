@@ -48,6 +48,12 @@ public class HabitacionRepositorioImpl implements IHabitacionRepositorio {
 	@Override
 	public List<Habitacion> buscarPorEstado(String estado) {
 		// TODO Auto-generated method stub
-		return null;
+		return jpaRepositorio.findByEstado(estado).stream().map(entityMapper::toDomain).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Habitacion> buscarCapacidad(int capacidad) {
+		// TODO Auto-generated method stub
+		return jpaRepositorio.findByCapacidad(capacidad).stream().map(entityMapper::toDomain).collect(Collectors.toList());
 	}
 }

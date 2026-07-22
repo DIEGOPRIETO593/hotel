@@ -35,7 +35,11 @@ public class HuespedUseCaseImpl implements IHuespedUseCase {
         repositorio.eliminar(idHuesped);
     }
     @Override
-    public Huesped actualizar(int id, Huesped entidad) {
-        return repositorio.guardar(entidad);
+    public Huesped actualizar(int idHuesped, Huesped datosActualizados) {
+        Huesped huespedExistente = buscarPorId(idHuesped);
+        huespedExistente.setNombre(datosActualizados.getNombre());
+        huespedExistente.setApellido(datosActualizados.getApellido());
+        huespedExistente.setTelefono(datosActualizados.getTelefono());
+        return repositorio.guardar(huespedExistente);
     }
 }

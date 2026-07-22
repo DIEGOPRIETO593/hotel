@@ -6,47 +6,60 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IHabitacionUseCase;
 import com.proyecto.hotel.presentacion.dto.request.HabitacionRequestDTO;
+import com.proyecto.hotel.presentacion.dto.request.HuespedRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.HabitacionResponseDTO;
+import com.proyecto.hotel.presentacion.dto.response.HuespedResponseDTO;
 import com.proyecto.hotel.presentacion.mapeadores.IHabitacionDtoMapper;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/habitacion")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HabitacionController {
-    
-    private final IHabitacionUseCase habitacionUseCase;
-    private final IHabitacionDtoMapper habitacionMapper;
 
-    public HabitacionController(IHabitacionUseCase habitacionUseCase, IHabitacionDtoMapper habitacionMapper) {
-        super();
-        this.habitacionUseCase = habitacionUseCase;
-        this.habitacionMapper = habitacionMapper;
-    }
-    
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public HabitacionResponseDTO guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
-        return habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
-    }
+	private final IHabitacionUseCase habitacionUseCase;
+	private final IHabitacionDtoMapper habitacionMapper;
 
-    @GetMapping
-    public List<HabitacionResponseDTO> listarTodo() {
-        return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
-    }
+	public HabitacionController(IHabitacionUseCase habitacionUseCase, IHabitacionDtoMapper habitacionMapper) {
+		super();
+		this.habitacionUseCase = habitacionUseCase;
+		this.habitacionMapper = habitacionMapper;
+	}
 
-    @GetMapping("/{id}")
-    public HabitacionResponseDTO buscarPorId(@PathVariable("id") int id) {
-        return habitacionMapper.toResponseDto(habitacionUseCase.buscarPorId(id));
-    }
-
-    @PutMapping("/{id}")
-    public HabitacionResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody HabitacionRequestDTO dto) {
-        return habitacionMapper.toResponseDto(habitacionUseCase.actualizar(id, habitacionMapper.toDomain(dto)));
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public HabitacionResponseDTO guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
+		return habitacionMapper
+				.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
+	}
+	
+	@PutMapping("/{id}")
+    public HabitacionResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) { 
+        var habitacionDomain = habitacionMapper.toDomain(habitacionRequestDto);
+        var resultado = habitacionUseCase.actualizar(id, habitacionDomain);
+        return habitacionMapper.toResponseDto(resultado);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
-        habitacionUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
-    }
+	@GetMapping
+	public List<HabitacionResponseDTO> listarTodo() {
+		return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable int id) {
+		habitacionUseCase.eliminar(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	
+	
+	@GetMapping("/buscar")
+	public List<HabitacionResponseDTO> buscarHabitaciones(
+			@RequestParam(required = false, defaultValue = "0") String estado) {
+
+		return habitacionUseCase.buscarPorEstado(estado).stream().map(habitacionMapper::toResponseDto).toList();
+
+	}
 }

@@ -1,86 +1,85 @@
 package com.proyecto.hotel.dominio.entidades;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Estadia {
+    private int idEstadia;
+    private Huesped huesped; 
+    private Habitacion habitacion;
+    private LocalDateTime fechaIngreso;
+    private LocalDateTime fechaSalida;
+    private int cantidadHuespedes;
+    private double totalPagar;
 
-	private int id_estadia;
-	private int id_huesped;
-	private int id_habitacion;
-	private Date fecha_ingreso;
-	private Date fecha_salida;
-	private int cantidad_huespedes;
-	private double total_pagar;
+    public Estadia() {
+        super();
+    }
 
-	public Estadia() {
-		super();
-	}
+    public Estadia(int idEstadia, Huesped huesped, Habitacion habitacion, LocalDateTime fechaIngreso,
+            LocalDateTime fechaSalida, int cantidadHuespedes, double totalPagar) {
+        super();
+        this.idEstadia = idEstadia;
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.cantidadHuespedes = cantidadHuespedes;
+        this.totalPagar = totalPagar;
+    }
 
-	public Estadia(int id_estadia, int id_huesped, int id_habitacion, Date fecha_ingreso, Date fecha_salida,
-			int cantidad_huespedes, double total_pagar) {
-		super();
-		this.id_estadia = id_estadia;
-		this.id_huesped = id_huesped;
-		this.id_habitacion = id_habitacion;
-		this.fecha_ingreso = fecha_ingreso;
-		this.fecha_salida = fecha_salida;
-		this.cantidad_huespedes = cantidad_huespedes;
-		this.total_pagar = total_pagar;
-	}
+    public int getIdEstadia() {
+        return idEstadia;
+    }
 
-	public int getId_estadia() {
-		return id_estadia;
-	}
+    public void setIdEstadia(int idEstadia) {
+        this.idEstadia = idEstadia;
+    }
 
-	public void setId_estadia(int id_estadia) {
-		this.id_estadia = id_estadia;
-	}
+    public Huesped getHuesped() {
+        return huesped;
+    }
 
-	public int getId_huesped() {
-		return id_huesped;
-	}
+    public void setHuesped(Huesped huesped) {
+        this.huesped = huesped;
+    }
 
-	public void setId_huesped(int id_huesped) {
-		this.id_huesped = id_huesped;
-	}
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
 
-	public int getId_habitacion() {
-		return id_habitacion;
-	}
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
 
-	public void setId_habitacion(int id_habitacion) {
-		this.id_habitacion = id_habitacion;
-	}
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
 
-	public Date getFecha_ingreso() {
-		return fecha_ingreso;
-	}
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
 
-	public void setFecha_ingreso(Date fecha_ingreso) {
-		this.fecha_ingreso = fecha_ingreso;
-	}
+    public LocalDateTime getFechaSalida() {
+        return fechaSalida;
+    }
 
-	public Date getFecha_salida() {
-		return fecha_salida;
-	}
+    public void setFechaSalida(LocalDateTime fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
 
-	public void setFecha_salida(Date fecha_salida) {
-		this.fecha_salida = fecha_salida;
-	}
+    public int getCantidadHuespedes() {
+        return cantidadHuespedes;
+    }
 
-	public int getCantidad_huespedes() {
-		return cantidad_huespedes;
-	}
+    public void setCantidadHuespedes(int cantidadHuespedes) {
+        this.cantidadHuespedes = cantidadHuespedes;
+    }
 
-	public void setCantidad_huespedes(int cantidad_huespedes) {
-		this.cantidad_huespedes = cantidad_huespedes;
-	}
+    public double getTotalPagar() {
+        return totalPagar;
+    }
 
-	public double getTotal_pagar() {
-		return total_pagar;
-	}
-
-	public void setTotal_pagar(double total_pagar) {
-		this.total_pagar = total_pagar;
-	}
+    public void setTotalPagar(double totalPagar) {
+        this.totalPagar = totalPagar;
+    }
 }

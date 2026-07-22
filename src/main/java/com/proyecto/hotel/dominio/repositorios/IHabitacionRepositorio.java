@@ -10,5 +10,6 @@ public interface IHabitacionRepositorio {
 	Optional<Habitacion> buscarPorId(int idHabitacion);
 	List<Habitacion> listarTodos();
 	List<Habitacion> buscarPorEstado(String estado); 
+	List<Habitacion> buscarCapacidad(int capacidad); 
 	void eliminar(int idHabitacion);
 }

@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/catalogo")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CatalogoServicioController {
 
     private final ICatalogoServicioUseCase catalogoUseCase;
@@ -26,6 +27,15 @@ public class CatalogoServicioController {
     @ResponseStatus(HttpStatus.CREATED)
     public CatalogoServicioResponseDTO guardar(@Valid @RequestBody CatalogoServicioRequestDTO dto) {
         return catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
+    }
+    
+    @PutMapping("/{id}")
+    public CatalogoServicioResponseDTO actualizar(
+            @PathVariable int id, 
+            @Valid @RequestBody CatalogoServicioRequestDTO catalogoRequestDto) {
+        var catalogoDomain = catalogoMapper.toDomain(catalogoRequestDto);
+        var resultado = catalogoUseCase.actualizar(id, catalogoDomain);
+        return catalogoMapper.toResponseDto(resultado);
     }
 
     @GetMapping

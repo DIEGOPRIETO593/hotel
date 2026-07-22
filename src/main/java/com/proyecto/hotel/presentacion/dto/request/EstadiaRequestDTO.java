@@ -1,5 +1,8 @@
 package com.proyecto.hotel.presentacion.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,10 +19,10 @@ public class EstadiaRequestDTO {
     private int idHabitacion;
     
     @NotNull
-    private LocalDateTime fechaIngreso;
+    public LocalDateTime fechaIngreso;
     
     @NotNull
-    private LocalDateTime fechaSalida;
+    public LocalDateTime fechaSalida;
     
     @NotNull
     private int cantidadHuespedes;
