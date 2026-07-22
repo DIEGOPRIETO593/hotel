@@ -1,23 +1,21 @@
 package com.proyecto.hotel.presentacion.mapeadores;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
 import com.proyecto.hotel.presentacion.dto.request.DetalleServicioEstadiaRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.DetalleServicioEstadiaResponseDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface IDetalleServicioEstadiaDtoMapper {
-	
-	
-	
-	@Mapping(target = "estadia.idEstadia", source = "idEstadia")
-    @Mapping(target = "catalogo.idServicio", source = "idServicio")
-    DetalleServicioEstadia toDomain(DetalleServicioEstadiaRequestDTO dto);
-
     
-    @Mapping(target = "idEstadia", source = "estadia.idEstadia")
-    @Mapping(target = "idServicio", source = "catalogo.idServicio")
+    @org.mapstruct.Mapping(source = "idDetalle", target = "id_detalle")
+    @org.mapstruct.Mapping(source = "idEstadia", target = "id_estadia")
+    @org.mapstruct.Mapping(source = "idServicio", target = "id_servicio")
+	DetalleServicioEstadia toDomain(DetalleServicioEstadiaRequestDTO dto);
+    
+    @org.mapstruct.Mapping(source = "id_detalle", target = "idDetalle")
+    @org.mapstruct.Mapping(source = "id_estadia", target = "idEstadia")
+    @org.mapstruct.Mapping(source = "id_servicio", target = "idServicio")
     DetalleServicioEstadiaResponseDTO toResponseDto(DetalleServicioEstadia entity);
 }

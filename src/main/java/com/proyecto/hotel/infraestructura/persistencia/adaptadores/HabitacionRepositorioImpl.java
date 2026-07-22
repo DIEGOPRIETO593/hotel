@@ -11,10 +11,10 @@ import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IHabitacionJpa
 import com.proyecto.hotel.infraestructura.repositorios.IHabitacionJpaRepositorio;
 
 public class HabitacionRepositorioImpl implements IHabitacionRepositorio {
-
+	
 	private final IHabitacionJpaRepositorio jpaRepositorio;
 	private final IHabitacionJpaMapper entityMapper;
-
+	
 	public HabitacionRepositorioImpl(IHabitacionJpaRepositorio jpaRepositorio, IHabitacionJpaMapper entityMapper) {
 		super();
 		this.jpaRepositorio = jpaRepositorio;
@@ -24,7 +24,7 @@ public class HabitacionRepositorioImpl implements IHabitacionRepositorio {
 	@Override
 	public Habitacion guardar(Habitacion nuevaHabitacion) {
 		HabitacionEntity entity = entityMapper.toEntity(nuevaHabitacion);
-		HabitacionEntity guardada = jpaRepositorio.save(entity);
+		HabitacionEntity guardada = jpaRepositorio.save(entity);		
 		return entityMapper.toDomain(guardada);
 	}
 
@@ -35,7 +35,9 @@ public class HabitacionRepositorioImpl implements IHabitacionRepositorio {
 
 	@Override
 	public List<Habitacion> listarTodos() {
-		return jpaRepositorio.findAll().stream().map(entityMapper::toDomain).collect(Collectors.toList());
+		return jpaRepositorio.findAll().stream()
+				.map(entityMapper::toDomain)
+				.collect(Collectors.toList());
 	}
 
 	@Override

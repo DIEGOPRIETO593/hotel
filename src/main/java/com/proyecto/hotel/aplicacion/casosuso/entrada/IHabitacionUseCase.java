@@ -12,4 +12,5 @@ public interface IHabitacionUseCase {
 	List<Habitacion> buscarCapacidad(int capacidad); 
     List<Habitacion> listarTodos();
     void eliminar(int idHabitacion);
+    Habitacion actualizar(int id, Habitacion entidad);
 }

@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import com.proyecto.hotel.dominio.entidades.Estadia;
 import com.proyecto.hotel.infraestructura.persistencia.jpa.EstadiaEntity;
 
-@Mapper(componentModel = "Spring", uses = { IHuespedJpaMapper.class, IHabitacionJpaMapper.class })
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface IEstadiaJpaMapper {
 
 	Estadia toDomain(EstadiaEntity entity);

@@ -45,6 +45,16 @@ public class EstadiaController {
         return estadiaUseCase.listarTodos().stream().map(estadiaMapper::toResponseDto).toList();
     }
 
+    @GetMapping("/{id}")
+    public EstadiaResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return estadiaMapper.toResponseDto(estadiaUseCase.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public EstadiaResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody EstadiaRequestDTO dto) {
+        return estadiaMapper.toResponseDto(estadiaUseCase.actualizar(id, estadiaMapper.toDomain(dto)));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         estadiaUseCase.eliminar(id);
