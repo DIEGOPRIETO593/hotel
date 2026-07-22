@@ -16,7 +16,7 @@ public class HuespedEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_huesped")
-    private int idHuesped;
+    private int id_huesped;
 
     @Column(name = "cedula", length = 10, unique = true)
     private String cedula;

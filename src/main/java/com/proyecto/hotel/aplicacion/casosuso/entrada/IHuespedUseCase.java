@@ -5,8 +5,8 @@ import com.proyecto.hotel.dominio.entidades.Huesped;
 
 public interface IHuespedUseCase {
     Huesped guardar(Huesped nuevoHuesped);
-    Huesped actualizar(int idHuesped, Huesped huespedActualizado);
     Huesped buscarPorId(int idHuesped);
     List<Huesped> listarTodos();
     void eliminar(int idHuesped);
+    Huesped actualizar(int id, Huesped entidad);
 }

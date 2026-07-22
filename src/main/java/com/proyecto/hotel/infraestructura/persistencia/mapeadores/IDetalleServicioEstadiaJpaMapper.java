@@ -1,18 +1,14 @@
 package com.proyecto.hotel.infraestructura.persistencia.mapeadores;
 
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
-import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicioEntity;
+import com.proyecto.hotel.infraestructura.persistencia.jpa.DetalleServicoEntity; // <-- Nota que aquí dice "Servico" (sin la 'i')
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring") 
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE) 
 public interface IDetalleServicioEstadiaJpaMapper {
 
-    @Mapping(source = "estadia.idEstadia", target = "idEstadia")
-    @Mapping(source = "catalogoServicio.idServicio", target = "idServicio")
-	DetalleServicioEstadia toDomain(DetalleServicioEntity entity);
+	DetalleServicioEstadia toDomain(DetalleServicoEntity entity);
 	
-    @Mapping(source = "idEstadia", target = "estadia.idEstadia")
-    @Mapping(source = "idServicio", target = "catalogoServicio.idServicio")
-	DetalleServicioEntity toEntity(DetalleServicioEstadia domain);
+	
+	DetalleServicoEntity toEntity(DetalleServicioEstadia domain);
 }

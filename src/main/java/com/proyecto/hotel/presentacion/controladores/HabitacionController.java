@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/habitacion")
-@CrossOrigin(origins = "http://localhost:4200")
 public class HabitacionController {
     
     private final IHabitacionUseCase habitacionUseCase;
@@ -30,19 +29,24 @@ public class HabitacionController {
         return habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
     }
 
-    @PutMapping("/{id}")
-    public HabitacionResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
-        return habitacionMapper.toResponseDto(habitacionUseCase.actualizar(id, habitacionMapper.toDomain(habitacionRequestDto)));
-    }
-
     @GetMapping
     public List<HabitacionResponseDTO> listarTodo() {
         return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
     }
 
+    @GetMapping("/{id}")
+    public HabitacionResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return habitacionMapper.toResponseDto(habitacionUseCase.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public HabitacionResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody HabitacionRequestDTO dto) {
+        return habitacionMapper.toResponseDto(habitacionUseCase.actualizar(id, habitacionMapper.toDomain(dto)));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
+    public ResponseEntity<Void> eliminar(@PathVariable int id) {
         habitacionUseCase.eliminar(id);
-        return ResponseEntity.ok(java.util.Map.of("mensaje", "Habitación eliminada correctamente"));
+        return ResponseEntity.noContent().build();
     }
 }

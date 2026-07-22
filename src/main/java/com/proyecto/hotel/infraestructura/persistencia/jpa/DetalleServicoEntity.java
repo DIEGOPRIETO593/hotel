@@ -13,12 +13,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "detalle_servicio_estadia")
-public class DetalleServicioEntity {
+public class DetalleServicoEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_detalle") 
-	private int idDetalle;
+	private int id_detalle;
 
 	@ManyToOne
 	@JoinColumn(name = "id_estadia", referencedColumnName = "id_estadia", nullable = false)

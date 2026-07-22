@@ -38,6 +38,20 @@ import com.proyecto.hotel.dominio.repositorios.IDetalleServicioEstadiaRepositori
 import com.proyecto.hotel.infraestructura.persistencia.adaptadores.DetalleServicioEstadiaRepositorioImpl;
 import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IDetalleServicioEstadiaJpaMapper;
 
+import com.proyecto.hotel.aplicacion.casosuso.entrada.IProductoUseCase;
+import com.proyecto.hotel.aplicacion.casosuso.impl.ProductoUseCaseImpl;
+import com.proyecto.hotel.dominio.repositorios.IProductoRepositorio;
+import com.proyecto.hotel.infraestructura.persistencia.adaptadores.ProductoRepositorioImpl;
+import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IProductoJpaMapper;
+import com.proyecto.hotel.infraestructura.repositorios.IProductoJpaRepositorio;
+
+import com.proyecto.hotel.aplicacion.casosuso.entrada.IMinibarUseCase;
+import com.proyecto.hotel.aplicacion.casosuso.impl.MinibarUseCaseImpl;
+import com.proyecto.hotel.dominio.repositorios.IMinibarRepositorio;
+import com.proyecto.hotel.infraestructura.persistencia.adaptadores.MinibarRepositorioImpl;
+import com.proyecto.hotel.infraestructura.persistencia.mapeadores.IMinibarJpaMapper;
+import com.proyecto.hotel.infraestructura.repositorios.IMinibarJpaRepositorio;
+
 @Configuration
 public class HotelConfig {
 
@@ -56,10 +70,10 @@ public class HotelConfig {
 		return new EstadiaRepositorioImpl(jpaRepository, mapper);
 	}
 
-    @Bean
-    public IEstadiaUseCase estadiaUseCase(IEstadiaRepositorio repositorio, IHabitacionRepositorio habitacionRepositorio) {
-        return new EstadiaUseCaseImpl(repositorio, habitacionRepositorio);
-    }
+	@Bean
+	IEstadiaUseCase estadiaUseCase(IEstadiaRepositorio repositorio) {
+		return new EstadiaUseCaseImpl(repositorio);
+	}
 
 	@Bean
 	IHabitacionRepositorio habitacionRepositorio(IHabitacionJpaRepositorio jpaRepository, IHabitacionJpaMapper mapper) {
@@ -72,8 +86,7 @@ public class HotelConfig {
 	}
 
 	@Bean
-	ICatalogoServicioRepositorio catalogoServicioRepositorio(ICatalogoJpaRepositorio jpaRepository,
-			ICatalogoServicioJpaMapper mapper) {
+	ICatalogoServicioRepositorio catalogoServicioRepositorio(ICatalogoJpaRepositorio jpaRepository, ICatalogoServicioJpaMapper mapper) {
 		return new CatalogoServicioRepositorioImpl(jpaRepository, mapper);
 	}
 
@@ -82,16 +95,34 @@ public class HotelConfig {
 		return new CatalogoServicioUseCaseImpl(repositorio);
 	}
 
-	
 	@Bean
-	IDetalleServicioEstadiaRepositorio detalleServicioEstadiaRepositorio(IDetalleServicioJpaRepositorio jpaRepository, 
-			IDetalleServicioEstadiaJpaMapper mapper) {
+	IDetalleServicioEstadiaRepositorio detalleServicioEstadiaRepositorio(IDetalleServicioJpaRepositorio jpaRepository, IDetalleServicioEstadiaJpaMapper mapper) {
 		return new DetalleServicioEstadiaRepositorioImpl(jpaRepository, mapper);
 	}
 
 	@Bean
 	IDetalleServicioEstadiaUseCase detalleServicioEstadiaUseCase(IDetalleServicioEstadiaRepositorio repositorio) {
 		return new DetalleServicioEstadiaUseCaseImpl(repositorio);
+	}
+
+	@Bean
+	IProductoRepositorio productoRepositorio(IProductoJpaRepositorio jpaRepository, IProductoJpaMapper mapper) {
+		return new ProductoRepositorioImpl(jpaRepository, mapper);
+	}
+
+	@Bean
+	IProductoUseCase productoUseCase(IProductoRepositorio repositorio) {
+		return new ProductoUseCaseImpl(repositorio);
+	}
+
+	@Bean
+	IMinibarRepositorio minibarRepositorio(IMinibarJpaRepositorio jpaRepository, IMinibarJpaMapper mapper, IHabitacionJpaRepositorio habitacionJpa, IProductoJpaRepositorio productoJpa) {
+		return new MinibarRepositorioImpl(jpaRepository, mapper, habitacionJpa, productoJpa);
+	}
+
+	@Bean
+	IMinibarUseCase minibarUseCase(IMinibarRepositorio repositorio) {
+		return new MinibarUseCaseImpl(repositorio);
 	}
 
 }

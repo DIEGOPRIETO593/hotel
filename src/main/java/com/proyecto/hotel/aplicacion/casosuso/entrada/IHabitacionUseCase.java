@@ -5,8 +5,8 @@ import com.proyecto.hotel.dominio.entidades.Habitacion;
 
 public interface IHabitacionUseCase {
     Habitacion guardar(Habitacion nuevaHabitacion);
-    Habitacion actualizar(int idHabitacion, Habitacion habitacionActualizada);
     Habitacion buscarPorId(int idHabitacion);
     List<Habitacion> listarTodos();
     void eliminar(int idHabitacion);
+    Habitacion actualizar(int id, Habitacion entidad);
 }

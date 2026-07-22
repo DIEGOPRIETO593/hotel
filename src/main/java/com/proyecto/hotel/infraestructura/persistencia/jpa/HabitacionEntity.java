@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
+@Data 
 @Entity
 @Table(name = "habitacion")
 public class HabitacionEntity {
@@ -16,9 +16,9 @@ public class HabitacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "id_habitacion")
-    private int idHabitacion;
+    private int id_habitacion;
 
-    @Column(name = "numero", length = 10)
+    @Column(name = "numero", length = 10, unique = true)
     private String numero;
 
     @Column(name = "estado", length = 30) 

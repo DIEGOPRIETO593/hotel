@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/detalle")
-@CrossOrigin(origins = "http://localhost:4200")
 public class DetalleServicioEstadiaController {
     
     private final IDetalleServicioEstadiaUseCase detalleUseCase;
@@ -30,19 +29,24 @@ public class DetalleServicioEstadiaController {
         return detalleMapper.toResponseDto(detalleUseCase.guardar(detalleMapper.toDomain(detalleRequestDto)));
     }
 
-    @PutMapping("/{id}")
-    public DetalleServicioEstadiaResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto) {
-        return detalleMapper.toResponseDto(detalleUseCase.actualizar(id, detalleMapper.toDomain(detalleRequestDto)));
-    }
-
     @GetMapping
     public List<DetalleServicioEstadiaResponseDTO> listarTodo() {
         return detalleUseCase.listarTodos().stream().map(detalleMapper::toResponseDto).toList();
     }
 
+    @GetMapping("/{id}")
+    public DetalleServicioEstadiaResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return detalleMapper.toResponseDto(detalleUseCase.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public DetalleServicioEstadiaResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody DetalleServicioEstadiaRequestDTO dto) {
+        return detalleMapper.toResponseDto(detalleUseCase.actualizar(id, detalleMapper.toDomain(dto)));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
+    public ResponseEntity<Void> eliminar(@PathVariable int id) {
         detalleUseCase.eliminar(id);
-        return ResponseEntity.ok(java.util.Map.of("mensaje", "Detalle eliminado correctamente"));
+        return ResponseEntity.noContent().build();
     }
 }

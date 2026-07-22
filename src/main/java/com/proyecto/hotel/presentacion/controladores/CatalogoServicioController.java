@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/catalogo")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CatalogoServicioController {
 
     private final ICatalogoServicioUseCase catalogoUseCase;
@@ -29,19 +28,24 @@ public class CatalogoServicioController {
         return catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
     }
 
-    @PutMapping("/{id}")
-    public CatalogoServicioResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody CatalogoServicioRequestDTO catalogoRequestDto) {
-        return catalogoMapper.toResponseDto(catalogoUseCase.actualizar(id, catalogoMapper.toDomain(catalogoRequestDto)));
-    }
-
     @GetMapping
     public List<CatalogoServicioResponseDTO> listarTodo() {
         return catalogoUseCase.listarTodos().stream().map(catalogoMapper::toResponseDto).toList();
     }
 
+    @GetMapping("/{id}")
+    public CatalogoServicioResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return catalogoMapper.toResponseDto(catalogoUseCase.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public CatalogoServicioResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody CatalogoServicioRequestDTO dto) {
+        return catalogoMapper.toResponseDto(catalogoUseCase.actualizar(id, catalogoMapper.toDomain(dto)));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<java.util.Map<String, String>> eliminar(@PathVariable int id) {
+    public ResponseEntity<Void> eliminar(@PathVariable int id) {
         catalogoUseCase.eliminar(id);
-        return ResponseEntity.ok(java.util.Map.of("mensaje", "Servicio eliminado correctamente"));
+        return ResponseEntity.noContent().build();
     }
 }

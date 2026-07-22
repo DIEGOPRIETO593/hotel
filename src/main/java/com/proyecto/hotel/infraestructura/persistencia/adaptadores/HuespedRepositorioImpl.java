@@ -47,6 +47,7 @@ public class HuespedRepositorioImpl implements IHuespedRepositorio {
 
 	@Override
 	public Optional<Huesped> buscarPorCedula(String cedula) {
-		return jpaRepositorio.findByCedula(cedula).map(entityMapper::toDomain);
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 }

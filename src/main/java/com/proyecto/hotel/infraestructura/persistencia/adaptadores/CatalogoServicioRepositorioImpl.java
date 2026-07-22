@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Repository;
+
 import com.proyecto.hotel.dominio.entidades.CatalogoServicio;
 import com.proyecto.hotel.dominio.repositorios.ICatalogoServicioRepositorio;
 import com.proyecto.hotel.infraestructura.persistencia.jpa.CatalogoEntity;
