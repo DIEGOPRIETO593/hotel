@@ -53,11 +53,6 @@ public class HuespedController {
         return huespedMapper.toResponseDto(huespedUseCase.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
-    public HuespedResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody HuespedRequestDTO dto) {
-        return huespedMapper.toResponseDto(huespedUseCase.actualizar(id, huespedMapper.toDomain(dto)));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         huespedUseCase.eliminar(id);

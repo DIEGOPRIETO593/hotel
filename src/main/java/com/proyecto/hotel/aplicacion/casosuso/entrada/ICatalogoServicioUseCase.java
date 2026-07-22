@@ -9,5 +9,4 @@ public interface ICatalogoServicioUseCase {
     CatalogoServicio buscarPorId(int idServicio);
     List<CatalogoServicio> listarTodos();
     void eliminar(int idServicio);
-    CatalogoServicio actualizar(int id, CatalogoServicio entidad);
 }

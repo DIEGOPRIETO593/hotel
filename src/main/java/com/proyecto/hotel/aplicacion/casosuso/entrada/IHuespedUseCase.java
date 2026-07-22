@@ -9,5 +9,4 @@ public interface IHuespedUseCase {
     Huesped buscarPorId(int idHuesped);
     List<Huesped> listarTodos();
     void eliminar(int idHuesped);
-    Huesped actualizar(int id, Huesped entidad);
 }

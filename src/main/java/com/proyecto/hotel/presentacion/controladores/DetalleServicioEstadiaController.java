@@ -49,11 +49,6 @@ public class DetalleServicioEstadiaController {
         return detalleMapper.toResponseDto(detalleUseCase.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
-    public DetalleServicioEstadiaResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody DetalleServicioEstadiaRequestDTO dto) {
-        return detalleMapper.toResponseDto(detalleUseCase.actualizar(id, detalleMapper.toDomain(dto)));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         detalleUseCase.eliminar(id);

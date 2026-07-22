@@ -48,11 +48,6 @@ public class CatalogoServicioController {
         return catalogoMapper.toResponseDto(catalogoUseCase.buscarPorId(id));
     }
 
-    @PutMapping("/{id}")
-    public CatalogoServicioResponseDTO actualizar(@PathVariable("id") int id, @Valid @RequestBody CatalogoServicioRequestDTO dto) {
-        return catalogoMapper.toResponseDto(catalogoUseCase.actualizar(id, catalogoMapper.toDomain(dto)));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         catalogoUseCase.eliminar(id);

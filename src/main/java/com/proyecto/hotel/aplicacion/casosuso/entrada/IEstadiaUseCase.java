@@ -9,5 +9,4 @@ public interface IEstadiaUseCase {
     Estadia buscarPorId(int idEstadia);
     List<Estadia> listarTodos();
     void eliminar(int idEstadia);
-    Estadia actualizar(int id, Estadia entidad);
 }

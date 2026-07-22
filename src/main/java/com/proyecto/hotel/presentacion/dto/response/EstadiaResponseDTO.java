@@ -1,45 +1,45 @@
 package com.proyecto.hotel.presentacion.dto.response;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class EstadiaResponseDTO {
     
-    private Long idEstadia;
-    private Long idHuesped;
-    private Long idHabitacion;
-    private Timestamp fechaIngreso;
-    private Timestamp fechaSalida;
+    private Integer idEstadia;
+    private Integer idHuesped;
+    private Integer idHabitacion;
+    private LocalDateTime fechaIngreso;
+    private LocalDateTime fechaSalida;
     private Integer cantidadHuespedes;
     private Double totalPagar;
 
-    public Long getIdEstadia() {
+    public Integer getIdEstadia() {
         return idEstadia;
     }
-    public void setIdEstadia(Long idEstadia) {
+    public void setIdEstadia(Integer idEstadia) {
         this.idEstadia = idEstadia;
     }
-    public Long getIdHuesped() {
+    public Integer getIdHuesped() {
         return idHuesped;
     }
-    public void setIdHuesped(Long idHuesped) {
+    public void setIdHuesped(Integer idHuesped) {
         this.idHuesped = idHuesped;
     }
-    public Long getIdHabitacion() {
+    public Integer getIdHabitacion() {
         return idHabitacion;
     }
-    public void setIdHabitacion(Long idHabitacion) {
+    public void setIdHabitacion(Integer idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
-    public Timestamp getFechaIngreso() {
+    public LocalDateTime getFechaIngreso() {
         return fechaIngreso;
     }
-    public void setFechaIngreso(Timestamp fechaIngreso) {
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-    public Timestamp getFechaSalida() {
+    public LocalDateTime getFechaSalida() {
         return fechaSalida;
     }
-    public void setFechaSalida(Timestamp fechaSalida) {
+    public void setFechaSalida(LocalDateTime fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
     public Integer getCantidadHuespedes() {

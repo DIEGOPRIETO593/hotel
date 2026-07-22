@@ -9,5 +9,4 @@ public interface IDetalleServicioEstadiaUseCase {
     DetalleServicioEstadia buscarPorId(int idDetalle);
     List<DetalleServicioEstadia> listarTodos();
     void eliminar(int idDetalle);
-    DetalleServicioEstadia actualizar(int id, DetalleServicioEstadia entidad);
 }
