@@ -43,6 +43,11 @@ public class CatalogoServicioController {
         return catalogoUseCase.listarTodos().stream().map(catalogoMapper::toResponseDto).toList();
     }
 
+    @GetMapping("/{id}")
+    public CatalogoServicioResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return catalogoMapper.toResponseDto(catalogoUseCase.buscarPorId(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         catalogoUseCase.eliminar(id);

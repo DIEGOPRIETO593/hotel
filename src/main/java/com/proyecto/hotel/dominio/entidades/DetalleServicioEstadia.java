@@ -3,9 +3,9 @@ package com.proyecto.hotel.dominio.entidades;
 public class DetalleServicioEstadia
 {
 
-	private int idDetalle;
-	private Estadia estadia; 
-    private CatalogoServicio catalogo;
+	private int id_detalle;
+	private int id_estadia;
+	private int id_servicio;
 	private int cantidad;
 	private double subtotal;
 
@@ -13,65 +13,38 @@ public class DetalleServicioEstadia
 		super();
 	}
 
-	
-
-	public DetalleServicioEstadia(int idDetalle, Estadia estadia, CatalogoServicio catalogo, int cantidad,
-			double subtotal) {
+	public DetalleServicioEstadia(int id_detalle, int id_estadia, int id_servicio, int cantidad, double subtotal) {
 		super();
-		this.idDetalle = idDetalle;
-		this.estadia = estadia;
-		this.catalogo = catalogo;
+		this.id_detalle = id_detalle;
+		this.id_estadia = id_estadia;
+		this.id_servicio = id_servicio;
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
 	}
 
-
-
-	public int getIdDetalle() {
-		return idDetalle;
+	public int getId_detalle() {
+		return id_detalle;
 	}
 
-
-
-	public void setIdDetalle(int idDetalle) {
-		this.idDetalle = idDetalle;
+	public void setId_detalle(int id_detalle) {
+		this.id_detalle = id_detalle;
 	}
 
-
-
-	public Estadia getEstadia() {
-		return estadia;
+	public int getId_estadia() {
+		return id_estadia;
 	}
 
-
-
-	public void setEstadia(Estadia estadia) {
-		this.estadia = estadia;
+	public void setId_estadia(int id_estadia) {
+		this.id_estadia = id_estadia;
 	}
 
-
-
-	public CatalogoServicio getCatalogo() {
-		return catalogo;
+	public int getId_servicio() {
+		return id_servicio;
 	}
 
-
-
-	public void setCatalogo(CatalogoServicio catalogo) {
-		this.catalogo = catalogo;
+	public void setId_servicio(int id_servicio) {
+		this.id_servicio = id_servicio;
 	}
-
-
-
-	public int getidDetalle() {
-		return idDetalle;
-	}
-
-	public void setidDetalle(int idDetalle) {
-		this.idDetalle = idDetalle;
-	}
-
-	
 
 	public int getCantidad() {
 		return cantidad;

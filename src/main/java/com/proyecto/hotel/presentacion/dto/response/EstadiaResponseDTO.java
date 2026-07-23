@@ -1,34 +1,33 @@
 package com.proyecto.hotel.presentacion.dto.response;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class EstadiaResponseDTO {
     
-    private Long idEstadia;
-    private Long idHuesped;
-    private Long idHabitacion;
+    private Integer idEstadia;
+    private Integer idHuesped;
+    private Integer idHabitacion;
     private LocalDateTime fechaIngreso;
     private LocalDateTime fechaSalida;
     private Integer cantidadHuespedes;
     private Double totalPagar;
 
-    public Long getIdEstadia() {
+    public Integer getIdEstadia() {
         return idEstadia;
     }
-    public void setIdEstadia(Long idEstadia) {
+    public void setIdEstadia(Integer idEstadia) {
         this.idEstadia = idEstadia;
     }
-    public Long getIdHuesped() {
+    public Integer getIdHuesped() {
         return idHuesped;
     }
-    public void setIdHuesped(Long idHuesped) {
+    public void setIdHuesped(Integer idHuesped) {
         this.idHuesped = idHuesped;
     }
-    public Long getIdHabitacion() {
+    public Integer getIdHabitacion() {
         return idHabitacion;
     }
-    public void setIdHabitacion(Long idHabitacion) {
+    public void setIdHabitacion(Integer idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
     public LocalDateTime getFechaIngreso() {

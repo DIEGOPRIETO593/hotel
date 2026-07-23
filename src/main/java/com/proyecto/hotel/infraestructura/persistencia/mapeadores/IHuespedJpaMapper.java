@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import com.proyecto.hotel.dominio.entidades.Huesped;
 import com.proyecto.hotel.infraestructura.persistencia.jpa.HuespedEntity;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface IHuespedJpaMapper {
 
 	// Transforma un Entity de la BD a un objeto de Dominio

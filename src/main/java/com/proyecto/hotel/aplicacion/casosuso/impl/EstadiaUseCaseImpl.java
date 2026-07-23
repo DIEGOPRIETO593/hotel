@@ -26,17 +26,12 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     @Override
     public Estadia guardar(Estadia nuevaEstadia) {
-        Huesped huespedReal = huespedRepositorio.buscarPorId(nuevaEstadia.getHuesped().getidHuesped())
+        huespedRepositorio.buscarPorId(nuevaEstadia.getHuesped().getidHuesped())
                 .orElseThrow(() -> new RuntimeException("El huésped especificado no existe"));
 
-        Habitacion habitacionReal = habitacionRepository.buscarPorId(nuevaEstadia.getHabitacion().getIdhabitacion())
+        habitacionRepository.buscarPorId(nuevaEstadia.getHabitacion().getIdhabitacion())
                 .orElseThrow(() -> new RuntimeException("La habitación especificada no existe"));
 
-        nuevaEstadia.setHuesped(huespedReal);
-        nuevaEstadia.setHabitacion(habitacionReal);
-        
-
-        
         return repositorio.guardar(nuevaEstadia);
     }
 
@@ -63,7 +58,6 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
         estadiaExistente.setFechaIngreso(datosActualizados.getFechaIngreso());
         estadiaExistente.setHabitacion(datosActualizados.getHabitacion());
         estadiaExistente.setFechaSalida(datosActualizados.getFechaSalida());
-        estadiaExistente.setHabitacion(datosActualizados.getHabitacion());
         estadiaExistente.setHuesped(datosActualizados.getHuesped());
         estadiaExistente.setIdEstadia(datosActualizados.getIdEstadia());
         estadiaExistente.setTotalPagar(datosActualizados.getTotalPagar());
