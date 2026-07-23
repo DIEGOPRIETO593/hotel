@@ -39,7 +39,7 @@ public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
     @Override
     public CatalogoServicio actualizar(int idHuesped, CatalogoServicio datosActualizados) {
     	CatalogoServicio catalogoExistente = buscarPorId(idHuesped);
-        catalogoExistente.setNombreServicio(datosActualizados.getNombreServicio());
+        catalogoExistente.setnombreServicio(datosActualizados.getnombreServicio());
         catalogoExistente.setTarifa(datosActualizados.getTarifa());
         return repositorio.guardar(catalogoExistente);
     }

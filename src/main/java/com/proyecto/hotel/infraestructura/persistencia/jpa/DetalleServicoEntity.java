@@ -18,7 +18,7 @@ public class DetalleServicoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_detalle") 
-	private int id_detalle;
+	private int idDetalle;
 
 	@ManyToOne
 	@JoinColumn(name = "id_estadia", referencedColumnName = "id_estadia", nullable = false)

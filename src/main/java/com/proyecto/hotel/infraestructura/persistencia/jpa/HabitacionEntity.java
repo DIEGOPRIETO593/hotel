@@ -14,22 +14,22 @@ import lombok.Data;
 public class HabitacionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "id_habitacion")
-    private int id_habitacion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     
+    private int idhabitacion;
 
-    @Column(name = "numero", length = 10, unique = true)
+    @Column(name = "numero", length = 10)
     private String numero;
 
     @Column(name = "estado", length = 30) 
     private String estado;
 
     @Column(name = "piso") 
-    private int piso;
+    private Integer piso;
 
     @Column(name = "estrellas") 
-    private int estrellas;
+    private Integer estrellas;
 
     @Column(name = "capacidad")
-    private int capacidad;
+    private Integer capacidad;
 }

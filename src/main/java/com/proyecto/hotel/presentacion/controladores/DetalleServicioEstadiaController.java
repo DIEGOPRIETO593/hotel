@@ -44,11 +44,6 @@ public class DetalleServicioEstadiaController {
         return detalleUseCase.listarTodos().stream().map(detalleMapper::toResponseDto).toList();
     }
 
-    @GetMapping("/{id}")
-    public DetalleServicioEstadiaResponseDTO buscarPorId(@PathVariable("id") int id) {
-        return detalleMapper.toResponseDto(detalleUseCase.buscarPorId(id));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         detalleUseCase.eliminar(id);

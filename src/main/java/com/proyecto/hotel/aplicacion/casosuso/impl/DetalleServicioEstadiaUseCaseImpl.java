@@ -26,11 +26,14 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
 
     @Override
     public DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle) {
-        estadiaRepositorio.buscarPorId(nuevoDetalle.getId_estadia())
+        Estadia estadiaReal = estadiaRepositorio.buscarPorId(nuevoDetalle.getEstadia().getIdEstadia())
                 .orElseThrow(() -> new RuntimeException("La estadía especificada no existe"));
 
-        catalogoRepositorio.buscarPorId(nuevoDetalle.getId_servicio())
+        CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(nuevoDetalle.getCatalogo().getidServicio())
                 .orElseThrow(() -> new RuntimeException("El servicio especificado no existe"));
+
+        nuevoDetalle.setEstadia(estadiaReal);
+        nuevoDetalle.setCatalogo(servicioReal);
 
         return repositorio.guardar(nuevoDetalle);
     }
@@ -55,9 +58,9 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     public DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia datosActualizados) {
     	DetalleServicioEstadia detalleExistente = buscarPorId(idDetalle);
     	detalleExistente.setCantidad(datosActualizados.getCantidad());
-    	detalleExistente.setId_servicio(datosActualizados.getId_servicio());
-    	detalleExistente.setId_estadia(datosActualizados.getId_estadia());
-    	detalleExistente.setId_detalle(datosActualizados.getId_detalle());
+    	detalleExistente.setCatalogo(datosActualizados.getCatalogo());
+    	detalleExistente.setEstadia(datosActualizados.getEstadia());
+    	detalleExistente.setidDetalle(datosActualizados.getIdDetalle());
     	detalleExistente.setSubtotal(datosActualizados.getSubtotal());
         return repositorio.guardar(detalleExistente);
     }

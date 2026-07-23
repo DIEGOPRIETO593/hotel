@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import com.proyecto.hotel.dominio.entidades.CatalogoServicio;
 import com.proyecto.hotel.infraestructura.persistencia.jpa.CatalogoEntity;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
+@Mapper(componentModel = "Spring")
 public interface ICatalogoServicioJpaMapper {
 
 	CatalogoServicio toDomain(CatalogoEntity entity);
