@@ -31,12 +31,12 @@ public class GlobalExceptionHandler {
         
         String mensajeUsuario = "No se puede realizar la operación por restricciones de base de datos.";
         
-        if (mensajeDetallado.contains("cedula") || mensajeDetallado.contains("uk_")) {
-            mensajeUsuario = "La cédula ingresada ya existe. Detalle técnico: " + mensajeDetallado;
+        if (mensajeDetallado.contains("cedula") || mensajeDetallado.contains("uk_") || mensajeDetallado.contains("unique")) {
+            mensajeUsuario = "La cédula ingresada ya existe.";
         } else if (mensajeDetallado.contains("violates foreign key constraint") || mensajeDetallado.contains("fk_")) {
-            mensajeUsuario = "No se puede eliminar o agregar el registro porque está siendo usado por otra tabla (Ej: Huésped con Estadía). Detalle técnico: " + mensajeDetallado;
+            mensajeUsuario = "No se puede eliminar o agregar el registro porque está siendo usado por otra tabla (Ej: Huésped con Estadía).";
         } else {
-            mensajeUsuario = "Conflicto en la base de datos: " + mensajeDetallado;
+            mensajeUsuario = "No se puede realizar la operación por restricciones de base de datos.";
         }
 
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Conflicto de Datos", mensajeUsuario);
