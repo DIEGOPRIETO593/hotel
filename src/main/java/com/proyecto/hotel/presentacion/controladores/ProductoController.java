@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.hotel.presentacion.dto.response.SuccessResponse;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IProductoUseCase;
 import com.proyecto.hotel.presentacion.dto.request.ProductoRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.ProductoResponseDTO;
@@ -26,18 +27,20 @@ public class ProductoController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductoResponseDTO guardar(@Valid @RequestBody ProductoRequestDTO ProductoRequestDto) {
-        return ProductoMapper.toResponseDto(ProductoUseCase.guardar(ProductoMapper.toDomain(ProductoRequestDto)));
+    public SuccessResponse<ProductoResponseDTO> guardar(@Valid @RequestBody ProductoRequestDTO ProductoRequestDto)  {
+        ProductoResponseDTO res = ProductoMapper.toResponseDto(ProductoUseCase.guardar(ProductoMapper.toDomain(ProductoRequestDto)));
+        return new SuccessResponse<>(HttpStatus.CREATED.value(), "Ingreso correcto", res);
     }
     
     
     @PutMapping("/{id}")
-    public ProductoResponseDTO actualizar(
+    public SuccessResponse<ProductoResponseDTO> actualizar(
             @PathVariable int id, 
             @Valid @RequestBody ProductoRequestDTO ProductoRequestDto) {
         var ProductoDomain = ProductoMapper.toDomain(ProductoRequestDto);
         var resultado = ProductoUseCase.actualizar(id, ProductoDomain);
-        return ProductoMapper.toResponseDto(resultado);
+        ProductoResponseDTO res = ProductoMapper.toResponseDto(resultado);
+        return new SuccessResponse<>(HttpStatus.OK.value(), "Edición correcta", res);
     }
     
     
@@ -47,9 +50,16 @@ public class ProductoController {
         return ProductoUseCase.listarTodos().stream().map(ProductoMapper::toResponseDto).toList();
     }
 
+
+    @GetMapping("/{id}")
+    public ProductoResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return ProductoMapper.toResponseDto(ProductoUseCase.buscarPorId(id));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public SuccessResponse<ProductoResponseDTO> eliminar(@PathVariable("id") int id) {
+        ProductoResponseDTO dto = ProductoMapper.toResponseDto(ProductoUseCase.buscarPorId(id));
         ProductoUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return new SuccessResponse<>(org.springframework.http.HttpStatus.OK.value(), "Registro borrado exitosamente", dto);
     }
 }

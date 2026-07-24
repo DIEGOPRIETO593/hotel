@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.hotel.presentacion.dto.response.SuccessResponse;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.ICatalogoServicioUseCase;
 import com.proyecto.hotel.presentacion.dto.request.CatalogoServicioRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.CatalogoServicioResponseDTO;
@@ -25,17 +26,19 @@ public class CatalogoServicioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CatalogoServicioResponseDTO guardar(@Valid @RequestBody CatalogoServicioRequestDTO dto) {
-        return catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
+    public SuccessResponse<CatalogoServicioResponseDTO> guardar(@Valid @RequestBody CatalogoServicioRequestDTO dto)  {
+        CatalogoServicioResponseDTO res = catalogoMapper.toResponseDto(catalogoUseCase.guardar(catalogoMapper.toDomain(dto)));
+        return new SuccessResponse<>(HttpStatus.CREATED.value(), "Ingreso correcto", res);
     }
     
     @PutMapping("/{id}")
-    public CatalogoServicioResponseDTO actualizar(
+    public SuccessResponse<CatalogoServicioResponseDTO> actualizar(
             @PathVariable int id, 
             @Valid @RequestBody CatalogoServicioRequestDTO catalogoRequestDto) {
         var catalogoDomain = catalogoMapper.toDomain(catalogoRequestDto);
         var resultado = catalogoUseCase.actualizar(id, catalogoDomain);
-        return catalogoMapper.toResponseDto(resultado);
+        CatalogoServicioResponseDTO res = catalogoMapper.toResponseDto(resultado);
+        return new SuccessResponse<>(HttpStatus.OK.value(), "Edición correcta", res);
     }
 
     @GetMapping
@@ -43,9 +46,16 @@ public class CatalogoServicioController {
         return catalogoUseCase.listarTodos().stream().map(catalogoMapper::toResponseDto).toList();
     }
 
+
+    @GetMapping("/{id}")
+    public CatalogoServicioResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return catalogoMapper.toResponseDto(catalogoUseCase.buscarPorId(id));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public SuccessResponse<CatalogoServicioResponseDTO> eliminar(@PathVariable("id") int id) {
+        CatalogoServicioResponseDTO dto = catalogoMapper.toResponseDto(catalogoUseCase.buscarPorId(id));
         catalogoUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return new SuccessResponse<>(org.springframework.http.HttpStatus.OK.value(), "Registro borrado exitosamente", dto);
     }
 }

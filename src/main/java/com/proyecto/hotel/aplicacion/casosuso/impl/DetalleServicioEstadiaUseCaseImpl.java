@@ -1,6 +1,7 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
 import java.util.List;
+import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IDetalleServicioEstadiaUseCase;
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
 import com.proyecto.hotel.dominio.entidades.Estadia;
@@ -27,10 +28,10 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     @Override
     public DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle) {
         Estadia estadiaReal = estadiaRepositorio.buscarPorId(nuevoDetalle.getEstadia().getIdEstadia())
-                .orElseThrow(() -> new RuntimeException("La estadía especificada no existe"));
+                .orElseThrow(() -> new ResourceNotFoundException("La estadía especificada no existe"));
 
         CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(nuevoDetalle.getCatalogo().getidServicio())
-                .orElseThrow(() -> new RuntimeException("El servicio especificado no existe"));
+                .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
 
         nuevoDetalle.setEstadia(estadiaReal);
         nuevoDetalle.setCatalogo(servicioReal);
@@ -41,7 +42,7 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     @Override
     public DetalleServicioEstadia buscarPorId(int idDetalle) {
         return repositorio.buscarPorId(idDetalle)
-                .orElseThrow(() -> new RuntimeException("Detalle de servicio de estadía no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Detalle de servicio de estadía no encontrado"));
     }
 
     @Override
@@ -51,17 +52,30 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
 
     @Override
     public void eliminar(int idDetalle) {
+        buscarPorId(idDetalle);
+
         repositorio.eliminar(idDetalle);
     }
     
     @Override
     public DetalleServicioEstadia actualizar(int idDetalle, DetalleServicioEstadia datosActualizados) {
     	DetalleServicioEstadia detalleExistente = buscarPorId(idDetalle);
+    	
+        if (datosActualizados.getEstadia() != null && datosActualizados.getEstadia().getIdEstadia() > 0) {
+            Estadia estadiaReal = estadiaRepositorio.buscarPorId(datosActualizados.getEstadia().getIdEstadia())
+                .orElseThrow(() -> new ResourceNotFoundException("La estadía especificada no existe"));
+            detalleExistente.setEstadia(estadiaReal);
+        }
+
+        if (datosActualizados.getCatalogo() != null && datosActualizados.getCatalogo().getidServicio() > 0) {
+            CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(datosActualizados.getCatalogo().getidServicio())
+                .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
+            detalleExistente.setCatalogo(servicioReal);
+        }
+        
     	detalleExistente.setCantidad(datosActualizados.getCantidad());
-    	detalleExistente.setCatalogo(datosActualizados.getCatalogo());
-    	detalleExistente.setEstadia(datosActualizados.getEstadia());
-    	detalleExistente.setidDetalle(datosActualizados.getIdDetalle());
     	detalleExistente.setSubtotal(datosActualizados.getSubtotal());
+    	
         return repositorio.guardar(detalleExistente);
     }
 }

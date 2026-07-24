@@ -4,14 +4,14 @@ public class Producto {
     private int idProducto;
     private String nombre;
     private double precio;
-    private int cantidad;
+    private Integer cantidad;
     private int stock;
 
     public Producto() {
         super();
     }
 
-    public Producto(int idProducto, String nombre, double precio, int cantidad, int stock) {
+    public Producto(int idProducto, String nombre, double precio, Integer cantidad, int stock) {
         super();
         this.idProducto = idProducto;
         this.nombre = nombre;
@@ -44,11 +44,11 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 

@@ -11,5 +11,5 @@ public interface IHuespedJpaMapper {
 	Huesped toDomain(HuespedEntity entity);
 	
 	// Mapea un objeto de Dominio a un Entity de la BD
-	HuespedEntity toEntity(Huesped domain);
+		HuespedEntity toEntity(Huesped domain);
 }

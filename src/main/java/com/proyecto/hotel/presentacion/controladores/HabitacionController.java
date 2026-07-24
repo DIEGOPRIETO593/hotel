@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.hotel.presentacion.dto.response.SuccessResponse;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IHabitacionUseCase;
 import com.proyecto.hotel.presentacion.dto.request.HabitacionRequestDTO;
 import com.proyecto.hotel.presentacion.dto.request.HuespedRequestDTO;
@@ -28,18 +29,19 @@ public class HabitacionController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public HabitacionResponseDTO guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
-		return habitacionMapper
-				.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
+	public SuccessResponse<HabitacionResponseDTO> guardar(@Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) {
+		HabitacionResponseDTO res = habitacionMapper.toResponseDto(habitacionUseCase.guardar(habitacionMapper.toDomain(habitacionRequestDto)));
+        return new SuccessResponse<>(HttpStatus.CREATED.value(), "Ingreso correcto", res);
 	}
 	
 	@PutMapping("/{id}")
-    public HabitacionResponseDTO actualizar(
+    public SuccessResponse<HabitacionResponseDTO> actualizar(
             @PathVariable int id, 
             @Valid @RequestBody HabitacionRequestDTO habitacionRequestDto) { 
         var habitacionDomain = habitacionMapper.toDomain(habitacionRequestDto);
         var resultado = habitacionUseCase.actualizar(id, habitacionDomain);
-        return habitacionMapper.toResponseDto(resultado);
+        HabitacionResponseDTO res = habitacionMapper.toResponseDto(resultado);
+        return new SuccessResponse<>(HttpStatus.OK.value(), "Edición correcta", res);
     }
 
 	@GetMapping
@@ -47,10 +49,17 @@ public class HabitacionController {
 		return habitacionUseCase.listarTodos().stream().map(habitacionMapper::toResponseDto).toList();
 	}
 
+
+    @GetMapping("/{id}")
+    public HabitacionResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return habitacionMapper.toResponseDto(habitacionUseCase.buscarPorId(id));
+    }
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> eliminar(@PathVariable int id) {
+	public SuccessResponse<HabitacionResponseDTO> eliminar(@PathVariable int id) {
+        HabitacionResponseDTO dto = habitacionMapper.toResponseDto(habitacionUseCase.buscarPorId(id));
 		habitacionUseCase.eliminar(id);
-		return ResponseEntity.noContent().build();
+		return new SuccessResponse<>(HttpStatus.OK.value(), "Registro borrado exitosamente", dto);
 	}
 
 	

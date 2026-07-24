@@ -20,7 +20,7 @@ public class ProductoRequestDTO {
     private BigDecimal precio;
 
     @Min(value = 0, message = "La cantidad no puede ser negativa")
-    private int cantidad;
+    private Integer cantidad;
 
     @Min(value = 0, message = "El stock no puede ser negativo")
     private int stock;

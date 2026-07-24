@@ -9,5 +9,5 @@ public interface IEstadiaJpaMapper {
 
 	Estadia toDomain(EstadiaEntity entity);
 	
-	EstadiaEntity toEntity(Estadia domain);
+		EstadiaEntity toEntity(Estadia domain);
 }

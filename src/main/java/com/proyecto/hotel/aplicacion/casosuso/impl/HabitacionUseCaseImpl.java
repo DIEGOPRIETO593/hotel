@@ -1,6 +1,7 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
 import java.util.List;
+import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IHabitacionUseCase;
 import com.proyecto.hotel.dominio.entidades.Habitacion;
@@ -18,13 +19,17 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     @Override
     public Habitacion guardar(Habitacion nuevaHabitacion) {
+        boolean existe = listarTodos().stream().anyMatch(h -> h.getNumero().equals(nuevaHabitacion.getNumero()));
+        if (existe) {
+            throw new IllegalArgumentException("El número de habitación ingresado ya existe.");
+        }
         return repositorio.guardar(nuevaHabitacion);
     }
 
     @Override
     public Habitacion buscarPorId(int idHabitacion) {
         return repositorio.buscarPorId(idHabitacion)
-                .orElseThrow(() -> new RuntimeException("Habitación no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Habitación no encontrada"));
     }
 
     @Override
@@ -34,6 +39,8 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     @Override
     public void eliminar(int idHabitacion) {
+        buscarPorId(idHabitacion);
+
         repositorio.eliminar(idHabitacion);
     }
 
@@ -50,7 +57,11 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 	@Override
     public Habitacion actualizar(int idHabitacion, Habitacion datosActualizados) {
 		Habitacion habitacionExistente = buscarPorId(idHabitacion);
-		habitacionExistente.setNumero(datosActualizados.getNumero());
+		
+		if (datosActualizados.getNumero() != null && !datosActualizados.getNumero().equals(habitacionExistente.getNumero())) {
+            throw new IllegalArgumentException("El número de habitación no se puede modificar una vez registrado.");
+        }
+		
 		habitacionExistente.setCapacidad(datosActualizados.getCapacidad());
 		habitacionExistente.setEstado(datosActualizados.getEstado());
 		habitacionExistente.setEstrellas(datosActualizados.getEstrellas());
