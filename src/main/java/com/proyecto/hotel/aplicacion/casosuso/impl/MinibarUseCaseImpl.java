@@ -1,6 +1,7 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
 import java.util.List;
+import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IMinibarUseCase;
 import com.proyecto.hotel.dominio.entidades.Minibar;
 import com.proyecto.hotel.dominio.repositorios.IMinibarRepositorio;
@@ -22,7 +23,7 @@ public class MinibarUseCaseImpl implements IMinibarUseCase {
     @Override
     public Minibar buscarPorId(int idMinibar) {
         return repositorio.buscarPorId(idMinibar)
-                .orElseThrow(() -> new RuntimeException("Minibar no encontrado con el ID: " + idMinibar));
+                .orElseThrow(() -> new ResourceNotFoundException("Minibar no encontrado con el ID: " + idMinibar));
     }
 
     @Override
@@ -32,6 +33,8 @@ public class MinibarUseCaseImpl implements IMinibarUseCase {
 
     @Override
     public void eliminar(int idMinibar) {
+        buscarPorId(idMinibar);
+
         repositorio.eliminar(idMinibar);
     }
 

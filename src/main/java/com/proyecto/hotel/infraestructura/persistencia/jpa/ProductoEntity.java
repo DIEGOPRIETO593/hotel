@@ -25,7 +25,7 @@ public class ProductoEntity {
     private double precio;
 
     @Column(name = "cantidad")
-    private int cantidad;
+    private Integer cantidad;
 
     @Column(name = "stock")
     private int stock;

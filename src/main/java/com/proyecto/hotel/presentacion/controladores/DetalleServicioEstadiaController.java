@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.hotel.presentacion.dto.response.SuccessResponse;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IDetalleServicioEstadiaUseCase;
 import com.proyecto.hotel.presentacion.dto.request.DetalleServicioEstadiaRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.DetalleServicioEstadiaResponseDTO;
@@ -26,17 +27,19 @@ public class DetalleServicioEstadiaController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DetalleServicioEstadiaResponseDTO guardar(@Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto) {
-        return detalleMapper.toResponseDto(detalleUseCase.guardar(detalleMapper.toDomain(detalleRequestDto)));
+    public SuccessResponse<DetalleServicioEstadiaResponseDTO> guardar(@Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto)  {
+        DetalleServicioEstadiaResponseDTO res = detalleMapper.toResponseDto(detalleUseCase.guardar(detalleMapper.toDomain(detalleRequestDto)));
+        return new SuccessResponse<>(HttpStatus.CREATED.value(), "Ingreso correcto", res);
     }
     
     @PutMapping("/{id}")
-    public DetalleServicioEstadiaResponseDTO actualizar(
+    public SuccessResponse<DetalleServicioEstadiaResponseDTO> actualizar(
             @PathVariable int id, 
             @Valid @RequestBody DetalleServicioEstadiaRequestDTO detalleRequestDto) {
         var detalleServicioDomain = detalleMapper.toDomain(detalleRequestDto);
         var resultado = detalleUseCase.actualizar(id, detalleServicioDomain);
-        return detalleMapper.toResponseDto(resultado);
+        DetalleServicioEstadiaResponseDTO res = detalleMapper.toResponseDto(resultado);
+        return new SuccessResponse<>(HttpStatus.OK.value(), "Edición correcta", res);
     }
 
     @GetMapping
@@ -44,9 +47,16 @@ public class DetalleServicioEstadiaController {
         return detalleUseCase.listarTodos().stream().map(detalleMapper::toResponseDto).toList();
     }
 
+
+    @GetMapping("/{id}")
+    public DetalleServicioEstadiaResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return detalleMapper.toResponseDto(detalleUseCase.buscarPorId(id));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public SuccessResponse<DetalleServicioEstadiaResponseDTO> eliminar(@PathVariable("id") int id) {
+        DetalleServicioEstadiaResponseDTO dto = detalleMapper.toResponseDto(detalleUseCase.buscarPorId(id));
         detalleUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return new SuccessResponse<>(org.springframework.http.HttpStatus.OK.value(), "Registro borrado exitosamente", dto);
     }
 }

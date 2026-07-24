@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.hotel.presentacion.dto.response.SuccessResponse;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IMinibarUseCase;
 import com.proyecto.hotel.presentacion.dto.request.MinibarRequestDTO;
 import com.proyecto.hotel.presentacion.dto.response.MinibarResponseDTO;
@@ -26,18 +27,20 @@ public class MinibarController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MinibarResponseDTO guardar(@Valid @RequestBody MinibarRequestDTO MinibarRequestDto) {
-        return MinibarMapper.toResponseDto(MinibarUseCase.guardar(MinibarMapper.toDomain(MinibarRequestDto)));
+    public SuccessResponse<MinibarResponseDTO> guardar(@Valid @RequestBody MinibarRequestDTO MinibarRequestDto)  {
+        MinibarResponseDTO res = MinibarMapper.toResponseDto(MinibarUseCase.guardar(MinibarMapper.toDomain(MinibarRequestDto)));
+        return new SuccessResponse<>(HttpStatus.CREATED.value(), "Ingreso correcto", res);
     }
     
     
     @PutMapping("/{id}")
-    public MinibarResponseDTO actualizar(
+    public SuccessResponse<MinibarResponseDTO> actualizar(
             @PathVariable int id, 
             @Valid @RequestBody MinibarRequestDTO MinibarRequestDto) {
         var MinibarDomain = MinibarMapper.toDomain(MinibarRequestDto);
         var resultado = MinibarUseCase.actualizar(id, MinibarDomain);
-        return MinibarMapper.toResponseDto(resultado);
+        MinibarResponseDTO res = MinibarMapper.toResponseDto(resultado);
+        return new SuccessResponse<>(HttpStatus.OK.value(), "Edición correcta", res);
     }
     
     
@@ -47,9 +50,16 @@ public class MinibarController {
         return MinibarUseCase.listarTodos().stream().map(MinibarMapper::toResponseDto).toList();
     }
 
+
+    @GetMapping("/{id}")
+    public MinibarResponseDTO buscarPorId(@PathVariable("id") int id) {
+        return MinibarMapper.toResponseDto(MinibarUseCase.buscarPorId(id));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public SuccessResponse<MinibarResponseDTO> eliminar(@PathVariable("id") int id) {
+        MinibarResponseDTO dto = MinibarMapper.toResponseDto(MinibarUseCase.buscarPorId(id));
         MinibarUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+        return new SuccessResponse<>(org.springframework.http.HttpStatus.OK.value(), "Registro borrado exitosamente", dto);
     }
 }
