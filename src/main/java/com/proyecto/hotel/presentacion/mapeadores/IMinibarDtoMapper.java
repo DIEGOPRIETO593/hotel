@@ -14,6 +14,9 @@ public interface IMinibarDtoMapper {
     Minibar toDomain(MinibarRequestDTO dto);
 
     @Mapping(target = "idHabitacion", source = "habitacion.idhabitacion")
+    @Mapping(target = "numeroHabitacion", source = "habitacion.numero")
     @Mapping(target = "idProducto", source = "producto.idProducto")
+    @Mapping(target = "nombreProducto", source = "producto.nombre")
+    @Mapping(target = "total", expression = "java((double) (domain.getCantidad() * domain.getProducto().getPrecio()))")
     MinibarResponseDTO toResponseDto(Minibar domain);
 }

@@ -6,6 +6,9 @@ public class MinibarResponseDTO {
     private Long idHabitacion;
     private Long idProducto;
     private Integer cantidad;
+    private String numeroHabitacion;
+    private String nombreProducto;
+    private Double total;
 
     public Long getIdMinibar() {
         return idMinibar;
@@ -38,4 +41,11 @@ public class MinibarResponseDTO {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+
+    public String getNumeroHabitacion() { return numeroHabitacion; }
+    public void setNumeroHabitacion(String numeroHabitacion) { this.numeroHabitacion = numeroHabitacion; }
+    public String getNombreProducto() { return nombreProducto; }
+    public void setNombreProducto(String nombreProducto) { this.nombreProducto = nombreProducto; }
+    public Double getTotal() { return total; }
+    public void setTotal(Double total) { this.total = total; }
 }

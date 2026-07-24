@@ -19,5 +19,9 @@ public interface IDetalleServicioEstadiaDtoMapper {
     
     @Mapping(target = "idEstadia", source = "estadia.idEstadia")
     @Mapping(target = "idServicio", source = "catalogo.idServicio")
+    
+    @Mapping(target = "nombreHuesped", expression = "java(entity.getEstadia() != null && entity.getEstadia().getHuesped() != null ? entity.getEstadia().getHuesped().getNombre() + \" \" + entity.getEstadia().getHuesped().getApellido() : null)")
+    @Mapping(target = "numeroHabitacion", expression = "java(entity.getEstadia() != null && entity.getEstadia().getHabitacion() != null ? String.valueOf(entity.getEstadia().getHabitacion().getNumero()) : null)")
+    @Mapping(target = "nombreServicio", expression = "java(entity.getCatalogo() != null ? entity.getCatalogo().getnombreServicio() : null)")
     DetalleServicioEstadiaResponseDTO toResponseDto(DetalleServicioEstadia entity);
 }

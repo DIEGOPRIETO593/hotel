@@ -8,6 +8,7 @@ public class HabitacionResponseDTO {
     private Integer piso;
     private Integer estrellas;
     private Integer capacidad;
+    private Double precio;
 
     public Long getIdHabitacion() {
         return idHabitacion;
@@ -44,5 +45,13 @@ public class HabitacionResponseDTO {
     }
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 }

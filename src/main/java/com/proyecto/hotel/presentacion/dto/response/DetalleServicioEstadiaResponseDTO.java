@@ -5,8 +5,11 @@ public class DetalleServicioEstadiaResponseDTO {
     private Long idDetalle;
     private Long idEstadia;
     private Long idServicio;
+    private String nombreServicio;
     private Integer cantidad;
-    private Double subtotal;
+    private Double total;
+    private String numeroHabitacion;
+    private String nombreHuesped;
 
     public Long getIdDetalle() {
         return idDetalle;
@@ -20,6 +23,9 @@ public class DetalleServicioEstadiaResponseDTO {
     public void setIdEstadia(Long idEstadia) {
         this.idEstadia = idEstadia;
     }
+    public String getNombreServicio() { return nombreServicio; }
+    public void setNombreServicio(String nombreServicio) { this.nombreServicio = nombreServicio; }
+
     public Long getIdServicio() {
         return idServicio;
     }
@@ -32,10 +38,15 @@ public class DetalleServicioEstadiaResponseDTO {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-    public Double getSubtotal() {
-        return subtotal;
+    public Double getTotal() {
+        return total;
     }
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
+    public void setTotal(Double total) {
+        this.total = total;
     }
+
+    public String getNumeroHabitacion() { return numeroHabitacion; }
+    public void setNumeroHabitacion(String numeroHabitacion) { this.numeroHabitacion = numeroHabitacion; }
+    public String getNombreHuesped() { return nombreHuesped; }
+    public void setNombreHuesped(String nombreHuesped) { this.nombreHuesped = nombreHuesped; }
 }

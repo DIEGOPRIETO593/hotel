@@ -7,12 +7,13 @@ public class Habitacion {
     private int piso;
     private int estrellas;
     private int capacidad;
+    private Double precio;
 
     public Habitacion() {
         super();
     }
 
-    public Habitacion(int idhabitacion, String numero, String estado, int piso, int estrellas, int capacidad) {
+    public Habitacion(int idhabitacion, String numero, String estado, int piso, int estrellas, int capacidad, Double precio) {
         super();
         this.idhabitacion = idhabitacion;
         this.numero = numero;
@@ -20,6 +21,7 @@ public class Habitacion {
         this.piso = piso;
         this.estrellas = estrellas;
         this.capacidad = capacidad;
+        this.precio = precio;
     }
 
     public int getIdhabitacion() {
@@ -68,5 +70,13 @@ public class Habitacion {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 }

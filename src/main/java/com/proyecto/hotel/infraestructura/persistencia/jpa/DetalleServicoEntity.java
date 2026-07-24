@@ -31,6 +31,5 @@ public class DetalleServicoEntity {
 	@Column(name = "cantidad") 
 	private int cantidad;
 
-	@Column(name = "subtotal") 
-	private double subtotal;
+	@Column(name = "subtotal")private double total;
 }

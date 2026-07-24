@@ -74,7 +74,7 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
         }
         
     	detalleExistente.setCantidad(datosActualizados.getCantidad());
-    	detalleExistente.setSubtotal(datosActualizados.getSubtotal());
+    	detalleExistente.setTotal(datosActualizados.getTotal());
     	
         return repositorio.guardar(detalleExistente);
     }

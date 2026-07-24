@@ -1,6 +1,7 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IEstadiaUseCase;
 import com.proyecto.hotel.dominio.entidades.Estadia;
@@ -43,7 +44,13 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
         nuevaEstadia.setHuesped(huespedReal);
         nuevaEstadia.setHabitacion(habitacionReal);
         
-
+        long dias = ChronoUnit.DAYS.between(nuevaEstadia.getFechaIngreso(), nuevaEstadia.getFechaSalida());
+        if (dias < 1) dias = 1;
+        if (habitacionReal.getPrecio() != null) {
+            nuevaEstadia.setTotalPagar(dias * habitacionReal.getPrecio());
+        } else {
+            nuevaEstadia.setTotalPagar(0.0);
+        }
         
         return repositorio.guardar(nuevaEstadia);
     }
@@ -95,7 +102,14 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
         estadiaExistente.setCantidadHuespedes(datosActualizados.getCantidadHuespedes());
         estadiaExistente.setFechaIngreso(datosActualizados.getFechaIngreso());
         estadiaExistente.setFechaSalida(datosActualizados.getFechaSalida());
-        estadiaExistente.setTotalPagar(datosActualizados.getTotalPagar());
+        
+        long dias = ChronoUnit.DAYS.between(estadiaExistente.getFechaIngreso(), estadiaExistente.getFechaSalida());
+        if (dias < 1) dias = 1;
+        if (estadiaExistente.getHabitacion().getPrecio() != null) {
+            estadiaExistente.setTotalPagar(dias * estadiaExistente.getHabitacion().getPrecio());
+        } else {
+            estadiaExistente.setTotalPagar(0.0);
+        }
         
         return repositorio.guardar(estadiaExistente);
     }

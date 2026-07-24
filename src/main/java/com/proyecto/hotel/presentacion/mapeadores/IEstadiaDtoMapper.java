@@ -19,6 +19,8 @@ public interface IEstadiaDtoMapper {
 
 	@Mapping(target = "idHuesped", source = "huesped.idHuesped")
     @Mapping(target = "idHabitacion", source = "habitacion.idhabitacion")
+    @Mapping(target = "nombreHuesped", expression = "java(entity.getHuesped() != null ? entity.getHuesped().getNombre() + \" \" + entity.getHuesped().getApellido() : null)")
+    @Mapping(target = "numeroHabitacion", expression = "java(entity.getHabitacion() != null ? String.valueOf(entity.getHabitacion().getNumero()) : null)")
 	EstadiaResponseDTO toResponseDto(Estadia entity);
 	
 	

@@ -12,6 +12,8 @@ public class EstadiaResponseDTO {
     private LocalDateTime fechaSalida;
     private Integer cantidadHuespedes;
     private Double totalPagar;
+    private String nombreHuesped;
+    private String numeroHabitacion;
 
     public Long getIdEstadia() {
         return idEstadia;
@@ -54,5 +56,17 @@ public class EstadiaResponseDTO {
     }
     public void setTotalPagar(Double totalPagar) {
         this.totalPagar = totalPagar;
+    }
+    public String getNombreHuesped() {
+        return nombreHuesped;
+    }
+    public void setNombreHuesped(String nombreHuesped) {
+        this.nombreHuesped = nombreHuesped;
+    }
+    public String getNumeroHabitacion() {
+        return numeroHabitacion;
+    }
+    public void setNumeroHabitacion(String numeroHabitacion) {
+        this.numeroHabitacion = numeroHabitacion;
     }
 }

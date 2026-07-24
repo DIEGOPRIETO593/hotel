@@ -18,5 +18,5 @@ public class DetalleServicioEstadiaRequestDTO {
     private int cantidad;
     
     @NotNull
-    private BigDecimal subtotal;
+    private BigDecimal total;
 }

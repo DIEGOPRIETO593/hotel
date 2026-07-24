@@ -32,4 +32,7 @@ public class HabitacionEntity {
 
     @Column(name = "capacidad")
     private Integer capacidad;
+
+    @Column(name = "precio")
+    private Double precio;
 }
