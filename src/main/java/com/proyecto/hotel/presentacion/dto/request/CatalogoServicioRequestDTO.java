@@ -14,4 +14,6 @@ public class CatalogoServicioRequestDTO {
     
     @NotNull
     private BigDecimal tarifa;
+    
+    private String descripcion;
 }

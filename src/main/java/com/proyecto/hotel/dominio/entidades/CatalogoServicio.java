@@ -5,6 +5,7 @@ public class CatalogoServicio {
 	private int idServicio;
 	private String nombreServicio;
 	private double tarifa;
+	private String descripcion;
 
 	public CatalogoServicio() {
 		super();
@@ -15,6 +16,14 @@ public class CatalogoServicio {
 		this.idServicio = idServicio;
 		this.nombreServicio = nombreServicio;
 		this.tarifa = tarifa;
+	}
+
+	public CatalogoServicio(int idServicio, String nombreServicio, double tarifa, String descripcion) {
+		super();
+		this.idServicio = idServicio;
+		this.nombreServicio = nombreServicio;
+		this.tarifa = tarifa;
+		this.descripcion = descripcion;
 	}
 
 	public int getidServicio() {
@@ -39,5 +48,21 @@ public class CatalogoServicio {
 
 	public void setTarifa(double tarifa) {
 		this.tarifa = tarifa;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getdescripcion() {
+		return descripcion;
+	}
+
+	public void setdescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 }

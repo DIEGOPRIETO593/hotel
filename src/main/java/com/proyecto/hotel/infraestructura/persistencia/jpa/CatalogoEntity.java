@@ -23,4 +23,7 @@ public class CatalogoEntity {
 
     @Column(name = "tarifa") 
     private double tarifa; 
+
+    @Column(name = "descripcion", length = 255)
+    private String descripcion;
 }

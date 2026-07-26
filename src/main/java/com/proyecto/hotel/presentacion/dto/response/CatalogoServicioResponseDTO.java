@@ -5,6 +5,7 @@ public class CatalogoServicioResponseDTO {
     private Long idServicio;
     private String nombreServicio;
     private Double tarifa;
+    private String descripcion;
 
     public Long getIdServicio() {
         return idServicio;
@@ -23,5 +24,17 @@ public class CatalogoServicioResponseDTO {
     }
     public void setTarifa(Double tarifa) {
         this.tarifa = tarifa;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public String getdescripcion() {
+        return descripcion;
+    }
+    public void setdescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

@@ -55,6 +55,7 @@ public class CatalogoServicioUseCaseImpl implements ICatalogoServicioUseCase {
         
         catalogoExistente.setnombreServicio(datosActualizados.getnombreServicio());
         catalogoExistente.setTarifa(datosActualizados.getTarifa());
+        catalogoExistente.setDescripcion(datosActualizados.getDescripcion());
         return repositorio.guardar(catalogoExistente);
     }
 }
