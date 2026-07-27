@@ -23,12 +23,14 @@ public class EstadiaEntity {
 
 	
 	@ManyToOne
-	@JoinColumn(name = "id_huesped", nullable = false)
+	@JoinColumn(name = "id_huesped", nullable = true)
+	@org.hibernate.annotations.NotFound(action = org.hibernate.annotations.NotFoundAction.IGNORE)
 	private HuespedEntity huesped;
 
 	
 	@ManyToOne
-	@JoinColumn(name = "id_habitacion", nullable = false)
+	@JoinColumn(name = "id_habitacion", nullable = true)
+	@org.hibernate.annotations.NotFound(action = org.hibernate.annotations.NotFoundAction.IGNORE)
 	private HabitacionEntity habitacion;
 
 
@@ -44,5 +46,8 @@ public class EstadiaEntity {
 
 	@Column(name = "total_pagar")
 	private double totalPagar;
+
+	@Column(name = "estado")
+	private String estado;
 
 }

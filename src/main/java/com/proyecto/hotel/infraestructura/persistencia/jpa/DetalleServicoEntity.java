@@ -21,15 +21,20 @@ public class DetalleServicoEntity {
 	private int idDetalle;
 
 	@ManyToOne
-	@JoinColumn(name = "id_estadia", referencedColumnName = "id_estadia", nullable = false)
+	@JoinColumn(name = "id_estadia", referencedColumnName = "id_estadia", nullable = true)
+	@org.hibernate.annotations.NotFound(action = org.hibernate.annotations.NotFoundAction.IGNORE)
 	private EstadiaEntity estadia;
 
 	@ManyToOne
-	@JoinColumn(name = "id_servicio", referencedColumnName = "id_servicio", nullable = false)
+	@JoinColumn(name = "id_servicio", referencedColumnName = "id_servicio", nullable = true)
+	@org.hibernate.annotations.NotFound(action = org.hibernate.annotations.NotFoundAction.IGNORE)
 	private CatalogoEntity catalogoServicio;
 
 	@Column(name = "cantidad") 
 	private int cantidad;
 
 	@Column(name = "subtotal")private double total;
+
+	@Column(name = "estado", length = 30)
+	private String estado;
 }

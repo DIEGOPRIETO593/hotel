@@ -49,4 +49,7 @@ public class DetalleServicioEstadiaResponseDTO {
     public void setNumeroHabitacion(String numeroHabitacion) { this.numeroHabitacion = numeroHabitacion; }
     public String getNombreHuesped() { return nombreHuesped; }
     public void setNombreHuesped(String nombreHuesped) { this.nombreHuesped = nombreHuesped; }
+    private String estado;
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 }

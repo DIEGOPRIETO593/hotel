@@ -10,13 +10,14 @@ public class Estadia {
     private LocalDateTime fechaSalida;
     private int cantidadHuespedes;
     private double totalPagar;
+    private String estado;
 
     public Estadia() {
         super();
     }
 
     public Estadia(int idEstadia, Huesped huesped, Habitacion habitacion, LocalDateTime fechaIngreso,
-            LocalDateTime fechaSalida, int cantidadHuespedes, double totalPagar) {
+            LocalDateTime fechaSalida, int cantidadHuespedes, double totalPagar, String estado) {
         super();
         this.idEstadia = idEstadia;
         this.huesped = huesped;
@@ -25,6 +26,7 @@ public class Estadia {
         this.fechaSalida = fechaSalida;
         this.cantidadHuespedes = cantidadHuespedes;
         this.totalPagar = totalPagar;
+        this.estado = estado;
     }
 
     public int getIdEstadia() {
@@ -81,5 +83,13 @@ public class Estadia {
 
     public void setTotalPagar(double totalPagar) {
         this.totalPagar = totalPagar;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

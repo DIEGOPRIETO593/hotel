@@ -11,8 +11,14 @@ import com.proyecto.hotel.presentacion.dto.response.MinibarResponseDTO;
 import com.proyecto.hotel.presentacion.mapeadores.IMinibarDtoMapper;
 import jakarta.validation.Valid;
 
+/**
+ * Controlador REST: Gestión de endpoints para consumos de Minibar.
+ * Capa: Presentación / API REST.
+ * Expone operaciones CRUD y consultas especializadas por habitación bajo '/api/minibar'.
+ */
 @RestController
 @RequestMapping("api/minibar")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MinibarController {
     
     private final IMinibarUseCase MinibarUseCase;

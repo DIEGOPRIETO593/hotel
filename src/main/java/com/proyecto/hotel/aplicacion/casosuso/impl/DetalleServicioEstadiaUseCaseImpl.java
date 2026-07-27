@@ -10,6 +10,11 @@ import com.proyecto.hotel.dominio.repositorios.IDetalleServicioEstadiaRepositori
 import com.proyecto.hotel.dominio.repositorios.IEstadiaRepositorio;
 import com.proyecto.hotel.dominio.repositorios.ICatalogoServicioRepositorio;
 
+/**
+ * Caso de uso: Implementación de la gestión de Servicios consumidos durante una Estadía (ej. Lavandería, Room Service).
+ * Capa: Aplicación (Clean Architecture).
+ * Responsabilidad: Vincular servicios adicionales a la cuenta general del huésped en su estadía.
+ */
 public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadiaUseCase {
 
     private final IDetalleServicioEstadiaRepositorio repositorio;
@@ -27,6 +32,9 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
 
     @Override
     public DetalleServicioEstadia guardar(DetalleServicioEstadia nuevoDetalle) {
+        if (nuevoDetalle.getEstado() == null || nuevoDetalle.getEstado().trim().isEmpty()) {
+            nuevoDetalle.setEstado("Por Cobrar");
+        }
         Estadia estadiaReal = estadiaRepositorio.buscarPorId(nuevoDetalle.getEstadia().getIdEstadia())
                 .orElseThrow(() -> new ResourceNotFoundException("La estadía especificada no existe"));
 
@@ -73,8 +81,15 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
             detalleExistente.setCatalogo(servicioReal);
         }
         
-    	detalleExistente.setCantidad(datosActualizados.getCantidad());
-    	detalleExistente.setTotal(datosActualizados.getTotal());
+    	if (datosActualizados.getCantidad() > 0) {
+            detalleExistente.setCantidad(datosActualizados.getCantidad());
+        }
+    	if (datosActualizados.getTotal() > 0) {
+            detalleExistente.setTotal(datosActualizados.getTotal());
+        }
+        if (datosActualizados.getEstado() != null && !datosActualizados.getEstado().trim().isEmpty()) {
+            detalleExistente.setEstado(datosActualizados.getEstado());
+        }
     	
         return repositorio.guardar(detalleExistente);
     }

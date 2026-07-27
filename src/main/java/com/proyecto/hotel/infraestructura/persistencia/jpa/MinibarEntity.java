@@ -30,4 +30,7 @@ public class MinibarEntity {
 
     @Column(name = "cantidad")
     private int cantidad;
+
+    @Column(name = "estado", length = 30)
+    private String estado;
 }

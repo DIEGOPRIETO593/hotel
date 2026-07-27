@@ -11,8 +11,14 @@ import com.proyecto.hotel.presentacion.dto.response.ProductoResponseDTO;
 import com.proyecto.hotel.presentacion.mapeadores.IProductoDtoMapper;
 import jakarta.validation.Valid;
 
+/**
+ * Controlador REST: Gestión del inventario de Productos para Minibar.
+ * Capa: Presentación / API REST.
+ * Expone endpoints bajo '/api/productos' para abastecimiento y consulta de precios.
+ */
 @RestController
 @RequestMapping("api/producto")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductoController {
     
     private final IProductoUseCase ProductoUseCase;

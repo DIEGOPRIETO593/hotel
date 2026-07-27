@@ -8,6 +8,12 @@ import com.proyecto.hotel.dominio.entidades.Habitacion;
 import com.proyecto.hotel.dominio.entidades.Huesped;
 import com.proyecto.hotel.dominio.repositorios.IHabitacionRepositorio;
 
+/**
+ * Caso de uso: Implementación de la gestión del inventario de Habitaciones.
+ * Capa: Aplicación (Clean Architecture).
+ * Responsabilidad: Administrar el ciclo de vida de las habitaciones (crear, modificar, listar, eliminar)
+ * garantizando la integridad referencial.
+ */
 public class HabitacionUseCaseImpl implements IHabitacionUseCase {
 
     private final IHabitacionRepositorio repositorio;
@@ -62,10 +68,15 @@ public class HabitacionUseCaseImpl implements IHabitacionUseCase {
             throw new IllegalArgumentException("El número de habitación no se puede modificar una vez registrado.");
         }
 		
+		if ("Ocupada".equalsIgnoreCase(habitacionExistente.getEstado())) {
+            throw new IllegalArgumentException("No se puede modificar una habitación que se encuentra actualmente Ocupada en una estadía.");
+        }
+		
 		habitacionExistente.setCapacidad(datosActualizados.getCapacidad());
 		habitacionExistente.setEstado(datosActualizados.getEstado());
 		habitacionExistente.setEstrellas(datosActualizados.getEstrellas());
 		habitacionExistente.setPiso(datosActualizados.getPiso());
+		habitacionExistente.setPrecio(datosActualizados.getPrecio());
         return repositorio.guardar(habitacionExistente);
     }
 

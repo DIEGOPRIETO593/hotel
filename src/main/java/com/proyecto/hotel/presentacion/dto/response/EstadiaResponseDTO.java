@@ -14,6 +14,7 @@ public class EstadiaResponseDTO {
     private Double totalPagar;
     private String nombreHuesped;
     private String numeroHabitacion;
+    private String estado;
 
     public Long getIdEstadia() {
         return idEstadia;
@@ -68,5 +69,18 @@ public class EstadiaResponseDTO {
     }
     public void setNumeroHabitacion(String numeroHabitacion) {
         this.numeroHabitacion = numeroHabitacion;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public long getDias() {
+        if (fechaIngreso != null && fechaSalida != null) {
+            long dias = java.time.temporal.ChronoUnit.DAYS.between(fechaIngreso, fechaSalida);
+            return dias < 1 ? 1 : dias;
+        }
+        return 0;
     }
 }

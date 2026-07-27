@@ -5,6 +5,7 @@ public class Minibar {
     private Habitacion habitacion;
     private Producto producto;
     private int cantidad;
+    private String estado;
 
     public Minibar() {
         super();
@@ -16,6 +17,16 @@ public class Minibar {
         this.habitacion = habitacion;
         this.producto = producto;
         this.cantidad = cantidad;
+        this.estado = "Por Cobrar";
+    }
+
+    public Minibar(int idMinibar, Habitacion habitacion, Producto producto, int cantidad, String estado) {
+        super();
+        this.idMinibar = idMinibar;
+        this.habitacion = habitacion;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.estado = estado;
     }
 
     public int getIdMinibar() {
@@ -48,5 +59,13 @@ public class Minibar {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

@@ -48,4 +48,7 @@ public class MinibarResponseDTO {
     public void setNombreProducto(String nombreProducto) { this.nombreProducto = nombreProducto; }
     public Double getTotal() { return total; }
     public void setTotal(Double total) { this.total = total; }
+    private String estado;
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 }

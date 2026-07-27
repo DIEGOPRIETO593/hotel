@@ -31,10 +31,4 @@ public class CatalogoServicioResponseDTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public String getdescripcion() {
-        return descripcion;
-    }
-    public void setdescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

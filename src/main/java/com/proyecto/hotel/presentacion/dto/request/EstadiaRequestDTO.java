@@ -29,4 +29,6 @@ public class EstadiaRequestDTO {
     
     @NotNull
     private BigDecimal totalPagar;
+    
+    private String estado;
 }

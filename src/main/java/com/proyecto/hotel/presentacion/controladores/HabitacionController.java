@@ -13,9 +13,14 @@ import com.proyecto.hotel.presentacion.dto.response.HuespedResponseDTO;
 import com.proyecto.hotel.presentacion.mapeadores.IHabitacionDtoMapper;
 import jakarta.validation.Valid;
 
+/**
+ * Controlador REST: Gestión de endpoints para Habitaciones.
+ * Capa: Presentación / API REST.
+ * Expone los servicios de habitaciones bajo el prefijo '/api/habitaciones', consumidos por el cliente web WebClient.
+ */
 @RestController
 @RequestMapping("api/habitacion")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HabitacionController {
 
 	private final IHabitacionUseCase habitacionUseCase;

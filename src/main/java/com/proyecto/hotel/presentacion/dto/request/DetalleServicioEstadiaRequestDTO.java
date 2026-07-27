@@ -19,4 +19,6 @@ public class DetalleServicioEstadiaRequestDTO {
     
     @NotNull
     private BigDecimal total;
+
+    private String estado;
 }

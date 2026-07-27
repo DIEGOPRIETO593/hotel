@@ -11,6 +11,12 @@ import com.proyecto.hotel.dominio.repositorios.IEstadiaRepositorio;
 import com.proyecto.hotel.dominio.repositorios.IHabitacionRepositorio;
 import com.proyecto.hotel.dominio.repositorios.IHuespedRepositorio;
 
+/**
+ * Caso de uso: Implementación de la lógica de negocio para la gestión de Estadías.
+ * Capa: Aplicación (Clean Architecture / Arquitectura Hexagonal).
+ * Responsabilidad: Coordinar las operaciones entre las entidades Huesped, Habitacion y Estadia,
+ * aplicando reglas de negocio estrictas como validación de ocupación y transiciones de estado automáticas.
+ */
 public class EstadiaUseCaseImpl implements IEstadiaUseCase {
 
     private final IEstadiaRepositorio repositorio;
@@ -27,6 +33,14 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
     }
 
     @Override
+    /**
+     * Registra una nueva estadía aplicando las siguientes reglas de negocio:
+     * 1. Valida la existencia del Huésped y la Habitación en la base de datos.
+     * 2. Verifica que la habitación no esté actualmente ocupada por otra estadía activa.
+     * 3. Establece el estado por defecto 'Por Cobrar' si no se provee uno.
+     * 4. Actualiza automáticamente el estado de la habitación ('Disponible' si es pagado, 'Ocupada' en caso contrario).
+     * 5. Calcula automáticamente el total a pagar en función del número de días y la tarifa de la habitación.
+     */
     public Estadia guardar(Estadia nuevaEstadia) {
         Huesped huespedReal = huespedRepositorio.buscarPorId(nuevaEstadia.getHuesped().getidHuesped())
                 .orElseThrow(() -> new ResourceNotFoundException("El huésped especificado no existe"));
@@ -35,7 +49,7 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("La habitación especificada no existe"));
 
         boolean habitacionOcupada = listarTodos().stream()
-                .anyMatch(e -> e.getHabitacion().getIdhabitacion() == habitacionReal.getIdhabitacion());
+                .anyMatch(e -> e.getHabitacion().getIdhabitacion() == habitacionReal.getIdhabitacion() && !"Pagado".equalsIgnoreCase(e.getEstado()));
         
         if (habitacionOcupada) {
             throw new IllegalArgumentException("La habitación especificada ya se encuentra ocupada por otro huésped.");
@@ -44,6 +58,18 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
         nuevaEstadia.setHuesped(huespedReal);
         nuevaEstadia.setHabitacion(habitacionReal);
         
+        if (nuevaEstadia.getEstado() == null || nuevaEstadia.getEstado().trim().isEmpty()) {
+            nuevaEstadia.setEstado("Por Cobrar");
+        }
+        
+        if ("Pagado".equalsIgnoreCase(nuevaEstadia.getEstado())) {
+            habitacionReal.setEstado("Disponible");
+            habitacionRepository.guardar(habitacionReal);
+        } else {
+            habitacionReal.setEstado("Ocupada");
+            habitacionRepository.guardar(habitacionReal);
+        }
+
         long dias = ChronoUnit.DAYS.between(nuevaEstadia.getFechaIngreso(), nuevaEstadia.getFechaSalida());
         if (dias < 1) dias = 1;
         if (habitacionReal.getPrecio() != null) {
@@ -62,20 +88,33 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
     }
 
     @Override
+    /**
+     * Recupera y lista todas las estadías registradas en el sistema.
+     */
     public List<Estadia> listarTodos() {
-        return repositorio.listarTodos();
+        List<Estadia> lista = repositorio.listarTodos();
+        for (Estadia e : lista) {
+            if (e.getEstado() == null || e.getEstado().trim().isEmpty()) {
+                e.setEstado("Por Cobrar");
+            }
+        }
+        return lista;
     }
 
     @Override
     public void eliminar(int idEstadia) {
-        buscarPorId(idEstadia);
-
+        Estadia estadia = buscarPorId(idEstadia);
+        if (estadia.getHabitacion() != null && !"Pagado".equalsIgnoreCase(estadia.getEstado())) {
+            estadia.getHabitacion().setEstado("Disponible");
+            habitacionRepository.guardar(estadia.getHabitacion());
+        }
         repositorio.eliminar(idEstadia);
     }
     
     @Override
     public Estadia actualizar(int idEstadia, Estadia datosActualizados) {
     	Estadia estadiaExistente = buscarPorId(idEstadia);
+        Habitacion habitacionAntigua = estadiaExistente.getHabitacion();
         
         if (datosActualizados.getHuesped() != null && datosActualizados.getHuesped().getidHuesped() > 0) {
             Huesped huespedReal = huespedRepositorio.buscarPorId(datosActualizados.getHuesped().getidHuesped())
@@ -87,18 +126,36 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
             Habitacion habitacionReal = habitacionRepository.buscarPorId(datosActualizados.getHabitacion().getIdhabitacion())
                 .orElseThrow(() -> new ResourceNotFoundException("La habitación especificada no existe"));
             
-            if (habitacionReal.getIdhabitacion() != estadiaExistente.getHabitacion().getIdhabitacion()) {
+            if (habitacionReal.getIdhabitacion() != habitacionAntigua.getIdhabitacion()) {
                 boolean habitacionOcupada = listarTodos().stream()
-                    .anyMatch(e -> e.getHabitacion().getIdhabitacion() == habitacionReal.getIdhabitacion());
+                    .anyMatch(e -> e.getIdEstadia() != idEstadia && e.getHabitacion().getIdhabitacion() == habitacionReal.getIdhabitacion() && !"Pagado".equalsIgnoreCase(e.getEstado()));
                 
                 if (habitacionOcupada) {
                     throw new IllegalArgumentException("La nueva habitación especificada ya se encuentra ocupada por otro huésped.");
+                }
+                if (!"Pagado".equalsIgnoreCase(estadiaExistente.getEstado())) {
+                    habitacionAntigua.setEstado("Disponible");
+                    habitacionRepository.guardar(habitacionAntigua);
                 }
             }
             
             estadiaExistente.setHabitacion(habitacionReal);
         }
         
+        if (datosActualizados.getEstado() != null && !datosActualizados.getEstado().trim().isEmpty()) {
+            estadiaExistente.setEstado(datosActualizados.getEstado());
+        } else if (estadiaExistente.getEstado() == null) {
+            estadiaExistente.setEstado("Por Cobrar");
+        }
+        
+        if ("Pagado".equalsIgnoreCase(estadiaExistente.getEstado())) {
+            estadiaExistente.getHabitacion().setEstado("Disponible");
+            habitacionRepository.guardar(estadiaExistente.getHabitacion());
+        } else {
+            estadiaExistente.getHabitacion().setEstado("Ocupada");
+            habitacionRepository.guardar(estadiaExistente.getHabitacion());
+        }
+
         estadiaExistente.setCantidadHuespedes(datosActualizados.getCantidadHuespedes());
         estadiaExistente.setFechaIngreso(datosActualizados.getFechaIngreso());
         estadiaExistente.setFechaSalida(datosActualizados.getFechaSalida());
