@@ -31,4 +31,5 @@ public class EstadiaRequestDTO {
     private BigDecimal totalPagar;
     
     private String estado;
+    private String observaciones;
 }

@@ -76,6 +76,13 @@ public class EstadiaResponseDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    private String observaciones;
+    public String getObservaciones() {
+        return observaciones;
+    }
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
     public long getDias() {
         if (fechaIngreso != null && fechaSalida != null) {
             long dias = java.time.temporal.ChronoUnit.DAYS.between(fechaIngreso, fechaSalida);

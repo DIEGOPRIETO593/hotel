@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Listado de Estadías</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        body { background: linear-gradient(135deg, #f0f4ff, #e6e9ff); }
+        .card { border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .table th, .table td { vertical-align: middle; }
+        .action-btn { margin-right: 5px; }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Listado de Estadías</h4>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Huésped</th>
+                    <th>Habitación</th>
+                    <th>Estado</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="e : ${estadias}">
+                    <td th:text="${e.idEstadia}"></td>
+                    <td th:text="${e.nombreHuesped}"></td>
+                    <td th:text="${e.numeroHabitacion}"></td>
+                    <td th:text="${e.estado}"></td>
+                    <td th:text="${e.observaciones ?: '-'}"></td>
+                    <td>
+                        <button class="btn btn-success btn-sm action-btn"
+                                th:if="${e.estado == 'ACTIVA'}"
+                                th:onclick="|location.href='@{/api/estadia/{id}/pagarTodo(id=${e.idEstadia})}'|">
+                            Pagar Todo
+                        </button>
+                        <button class="btn btn-danger btn-sm action-btn"
+                                th:if="${e.estado == 'ACTIVA'}"
+                                th:onclick="|location.href='@{/api/estadia/{id}/cancelar(id=${e.idEstadia})}'|">
+                            Cancelar
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

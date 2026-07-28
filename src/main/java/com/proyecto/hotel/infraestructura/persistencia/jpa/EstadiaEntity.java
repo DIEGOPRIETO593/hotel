@@ -50,4 +50,7 @@ public class EstadiaEntity {
 	@Column(name = "estado")
 	private String estado;
 
+	@Column(name = "observaciones")
+	private String observaciones;
+
 }

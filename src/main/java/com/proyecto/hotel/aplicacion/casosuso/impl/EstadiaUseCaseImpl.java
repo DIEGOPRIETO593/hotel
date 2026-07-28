@@ -159,6 +159,7 @@ public class EstadiaUseCaseImpl implements IEstadiaUseCase {
         estadiaExistente.setCantidadHuespedes(datosActualizados.getCantidadHuespedes());
         estadiaExistente.setFechaIngreso(datosActualizados.getFechaIngreso());
         estadiaExistente.setFechaSalida(datosActualizados.getFechaSalida());
+        estadiaExistente.setObservaciones(datosActualizados.getObservaciones());
         
         long dias = ChronoUnit.DAYS.between(estadiaExistente.getFechaIngreso(), estadiaExistente.getFechaSalida());
         if (dias < 1) dias = 1;
