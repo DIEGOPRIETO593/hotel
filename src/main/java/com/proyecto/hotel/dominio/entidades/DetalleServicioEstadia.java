@@ -1,67 +1,36 @@
 package com.proyecto.hotel.dominio.entidades;
 
-public class DetalleServicioEstadia
-{
+import java.util.ArrayList;
+import java.util.List;
+
+public class DetalleServicioEstadia {
 
 	private int idDetalle;
 	private Estadia estadia; 
-    private CatalogoServicio catalogo;
-	private int cantidad;
 	private double total;
+	private String estado;
+	private List<DetalleServicioItem> items = new ArrayList<>();
 
 	public DetalleServicioEstadia() {
 		super();
 	}
 
-	
-
-	public DetalleServicioEstadia(int idDetalle, Estadia estadia, CatalogoServicio catalogo, int cantidad,
-			double total) {
+	public DetalleServicioEstadia(int idDetalle, Estadia estadia, double total, String estado, List<DetalleServicioItem> items) {
 		super();
 		this.idDetalle = idDetalle;
 		this.estadia = estadia;
-		this.catalogo = catalogo;
-		this.cantidad = cantidad;
 		this.total = total;
+		this.estado = estado;
+		this.items = items != null ? items : new ArrayList<>();
 	}
-
-
 
 	public int getIdDetalle() {
 		return idDetalle;
 	}
 
-
-
 	public void setIdDetalle(int idDetalle) {
 		this.idDetalle = idDetalle;
 	}
-
-
-
-	public Estadia getEstadia() {
-		return estadia;
-	}
-
-
-
-	public void setEstadia(Estadia estadia) {
-		this.estadia = estadia;
-	}
-
-
-
-	public CatalogoServicio getCatalogo() {
-		return catalogo;
-	}
-
-
-
-	public void setCatalogo(CatalogoServicio catalogo) {
-		this.catalogo = catalogo;
-	}
-
-
 
 	public int getidDetalle() {
 		return idDetalle;
@@ -71,14 +40,12 @@ public class DetalleServicioEstadia
 		this.idDetalle = idDetalle;
 	}
 
-	
-
-	public int getCantidad() {
-		return cantidad;
+	public Estadia getEstadia() {
+		return estadia;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setEstadia(Estadia estadia) {
+		this.estadia = estadia;
 	}
 
 	public double getTotal() {
@@ -89,7 +56,19 @@ public class DetalleServicioEstadia
 		this.total = total;
 	}
 
-	private String estado;
-	public String getEstado() { return estado; }
-	public void setEstado(String estado) { this.estado = estado; }
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public List<DetalleServicioItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<DetalleServicioItem> items) {
+		this.items = items;
+	}
 }

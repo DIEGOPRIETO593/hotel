@@ -13,7 +13,4 @@ public interface IMinibarJpaRepositorio extends JpaRepository<MinibarEntity, Int
 	//List<MinibarEntity> findByHabitacionIdhabitacion(int idhabitacion);
 
     
-    List<MinibarEntity> findByProductoIdProducto(int idProducto);
-	
-
 }

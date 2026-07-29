@@ -1,8 +1,8 @@
 package com.proyecto.hotel.presentacion.dto.request;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import java.util.List;
 
 @Data
 public class MinibarRequestDTO {
@@ -12,12 +12,11 @@ public class MinibarRequestDTO {
     @NotNull(message = "El ID de la habitación es obligatorio")
     private int idHabitacion;
 
-    @NotNull(message = "El ID del producto es obligatorio")
-    private int idProducto;
+    @NotNull(message = "Los productos son obligatorios")
+    private List<Integer> idProductos;
 
-    @NotNull(message = "La cantidad es obligatoria")
-    @Min(value = 1, message = "La cantidad debe ser al menos 1")
-    private int cantidad;
+    @NotNull(message = "Las cantidades son obligatorias")
+    private List<Integer> cantidades;
 
     private String estado;
 }

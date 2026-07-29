@@ -1,5 +1,6 @@
 package com.proyecto.hotel.aplicacion.casosuso.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IMinibarUseCase;
@@ -42,7 +43,6 @@ public class MinibarUseCaseImpl implements IMinibarUseCase {
     @Override
     public void eliminar(int idMinibar) {
         buscarPorId(idMinibar);
-
         repositorio.eliminar(idMinibar);
     }
 
@@ -50,14 +50,18 @@ public class MinibarUseCaseImpl implements IMinibarUseCase {
     public Minibar actualizar(int idMinibar, Minibar datosActualizados) {
         Minibar minibarExistente = buscarPorId(idMinibar);
         
-        if (datosActualizados.getHabitacion() != null) {
+        if (datosActualizados.getHabitacion() != null && datosActualizados.getHabitacion().getIdhabitacion() > 0) {
             minibarExistente.setHabitacion(datosActualizados.getHabitacion());
         }
-        if (datosActualizados.getProducto() != null) {
-            minibarExistente.setProducto(datosActualizados.getProducto());
-        }
-        if (datosActualizados.getCantidad() > 0) {
-            minibarExistente.setCantidad(datosActualizados.getCantidad());
+        if (datosActualizados.getDetalles() != null && !datosActualizados.getDetalles().isEmpty()) {
+            if (minibarExistente.getDetalles() == null) {
+                minibarExistente.setDetalles(new ArrayList<>());
+            }
+            minibarExistente.getDetalles().clear();
+            datosActualizados.getDetalles().forEach(detalle -> {
+                detalle.setMinibar(minibarExistente);
+                minibarExistente.getDetalles().add(detalle);
+            });
         }
         if (datosActualizados.getEstado() != null && !datosActualizados.getEstado().trim().isEmpty()) {
             minibarExistente.setEstado(datosActualizados.getEstado());

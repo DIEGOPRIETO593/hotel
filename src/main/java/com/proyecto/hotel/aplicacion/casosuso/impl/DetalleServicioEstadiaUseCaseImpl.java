@@ -4,17 +4,13 @@ import java.util.List;
 import com.proyecto.hotel.aplicacion.excepciones.ResourceNotFoundException;
 import com.proyecto.hotel.aplicacion.casosuso.entrada.IDetalleServicioEstadiaUseCase;
 import com.proyecto.hotel.dominio.entidades.DetalleServicioEstadia;
+import com.proyecto.hotel.dominio.entidades.DetalleServicioItem;
 import com.proyecto.hotel.dominio.entidades.Estadia;
 import com.proyecto.hotel.dominio.entidades.CatalogoServicio;
 import com.proyecto.hotel.dominio.repositorios.IDetalleServicioEstadiaRepositorio;
 import com.proyecto.hotel.dominio.repositorios.IEstadiaRepositorio;
 import com.proyecto.hotel.dominio.repositorios.ICatalogoServicioRepositorio;
 
-/**
- * Caso de uso: Implementación de la gestión de Servicios consumidos durante una Estadía (ej. Lavandería, Room Service).
- * Capa: Aplicación (Clean Architecture).
- * Responsabilidad: Vincular servicios adicionales a la cuenta general del huésped en su estadía.
- */
 public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadiaUseCase {
 
     private final IDetalleServicioEstadiaRepositorio repositorio;
@@ -38,11 +34,16 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
         Estadia estadiaReal = estadiaRepositorio.buscarPorId(nuevoDetalle.getEstadia().getIdEstadia())
                 .orElseThrow(() -> new ResourceNotFoundException("La estadía especificada no existe"));
 
-        CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(nuevoDetalle.getCatalogo().getidServicio())
-                .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
-
         nuevoDetalle.setEstadia(estadiaReal);
-        nuevoDetalle.setCatalogo(servicioReal);
+
+        if (nuevoDetalle.getItems() != null) {
+            for (DetalleServicioItem item : nuevoDetalle.getItems()) {
+                CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(item.getCatalogoServicio().getidServicio())
+                        .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
+                item.setCatalogoServicio(servicioReal);
+                item.setDetalleServicio(nuevoDetalle);
+            }
+        }
 
         return repositorio.guardar(nuevoDetalle);
     }
@@ -61,7 +62,6 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
     @Override
     public void eliminar(int idDetalle) {
         buscarPorId(idDetalle);
-
         repositorio.eliminar(idDetalle);
     }
     
@@ -75,18 +75,18 @@ public class DetalleServicioEstadiaUseCaseImpl implements IDetalleServicioEstadi
             detalleExistente.setEstadia(estadiaReal);
         }
 
-        if (datosActualizados.getCatalogo() != null && datosActualizados.getCatalogo().getidServicio() > 0) {
-            CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(datosActualizados.getCatalogo().getidServicio())
-                .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
-            detalleExistente.setCatalogo(servicioReal);
-        }
-        
-    	if (datosActualizados.getCantidad() > 0) {
-            detalleExistente.setCantidad(datosActualizados.getCantidad());
-        }
-    	if (datosActualizados.getTotal() > 0) {
+        if (datosActualizados.getItems() != null && !datosActualizados.getItems().isEmpty()) {
+            detalleExistente.getItems().clear();
+            for (DetalleServicioItem item : datosActualizados.getItems()) {
+                CatalogoServicio servicioReal = catalogoRepositorio.buscarPorId(item.getCatalogoServicio().getidServicio())
+                        .orElseThrow(() -> new ResourceNotFoundException("El servicio especificado no existe"));
+                item.setCatalogoServicio(servicioReal);
+                item.setDetalleServicio(detalleExistente);
+                detalleExistente.getItems().add(item);
+            }
             detalleExistente.setTotal(datosActualizados.getTotal());
         }
+
         if (datosActualizados.getEstado() != null && !datosActualizados.getEstado().trim().isEmpty()) {
             detalleExistente.setEstado(datosActualizados.getEstado());
         }

@@ -37,6 +37,20 @@ public class MinibarRepositorioImpl implements IMinibarRepositorio {
     @Override
     public Minibar guardar(Minibar nuevoMinibar) {
         MinibarEntity entity = entityMapper.toEntity(nuevoMinibar);
+        
+        if (entity.getHabitacion() != null && entity.getHabitacion().getIdhabitacion() > 0) {
+            entity.setHabitacion(habitacionJpaRepositorio.findById(entity.getHabitacion().getIdhabitacion()).orElse(null));
+        }
+        
+        if (entity.getDetalles() != null) {
+            for (com.proyecto.hotel.infraestructura.persistencia.jpa.MinibarDetalleEntity det : entity.getDetalles()) {
+                det.setMinibar(entity);
+                if (det.getProducto() != null && det.getProducto().getIdProducto() > 0) {
+                    det.setProducto(productoJpaRepositorio.findById(det.getProducto().getIdProducto()).orElse(null));
+                }
+            }
+        }
+        
         MinibarEntity guardado = jpaRepositorio.save(entity);
         return entityMapper.toDomain(guardado);
     }
